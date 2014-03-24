@@ -20,24 +20,8 @@ public class ExchangeList extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //setListAdapter(new ArrayAdapter<String>(this, R.layout.list_mobile,
-        //		R.id.label, MOBILE_OS));
-
-        setListAdapter(new ExchangeArray(this, EXCHANGES));
-
-
+        setListAdapter(new ExchangeArrayAdapter(this, EXCHANGES));
     }
-
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-
-        //get selected items
-        String selectedValue = (String) getListAdapter().getItem(position);
-        Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
-
-    }
-
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +29,12 @@ public class ExchangeList extends ListActivity {
 //        setContentView(R.layout.activity_exchange_list);
 //    }
 
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        //get selected items
+        String selectedValue = (String) getListAdapter().getItem(position);
+        Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

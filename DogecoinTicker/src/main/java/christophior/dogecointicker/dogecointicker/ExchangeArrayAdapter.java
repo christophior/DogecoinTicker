@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ExchangeArray extends ArrayAdapter<String> {
+public class ExchangeArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
 
-    public ExchangeArray(Context context, String[] values) {
+    public ExchangeArrayAdapter(Context context, String[] values) {
         super(context, R.layout.activity_exchange_list, values);
         this.context = context;
         this.values = values;
@@ -25,22 +25,25 @@ public class ExchangeArray extends ArrayAdapter<String> {
 
         View rowView = inflater.inflate(R.layout.activity_exchange_list, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.label);
+
 //        ImageView imageView = (ImageView) rowView.findViewById(R.id.logo);
         textView.setText(values[position]);
 
         // Change icon based on name
-//        String s = values[position];
-//
-//        System.out.println(s);
 
-//        if (s.equals("WindowsMobile")) {
-//            imageView.setImageResource(R.drawable.windowsmobile_logo);
-//        } else if (s.equals("iOS")) {
-//            imageView.setImageResource(R.drawable.ios_logo);
-//        } else if (s.equals("Blackberry")) {
-//            imageView.setImageResource(R.drawable.blackberry_logo);
+//        String s = values[position];
+//        System.out.println(s);
+//
+//        if (s.equals("Cryptsy")) {
+//            imageView.setImageResource(R.drawable.cryptsy_logo);
+//        } else if (s.equals("CoinedUp")) {
+//            imageView.setImageResource(R.drawable.coinedup_logo);
+//        } else if (s.equals("Coins-E")) {
+//            imageView.setImageResource(R.drawable.coinse_logo);
+//        } else if (s.equals("Bter")) {
+//            imageView.setImageResource(R.drawable.bter_logo);
 //        } else {
-//            imageView.setImageResource(R.drawable.android_logo);
+//            imageView.setImageResource(R.drawable.vircurex_logo);
 //        }
 
         return rowView;
