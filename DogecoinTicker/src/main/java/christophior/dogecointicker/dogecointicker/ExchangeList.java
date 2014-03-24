@@ -42,22 +42,22 @@ public class ExchangeList extends ListActivity {
 //                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
                 break;
             case 1:
-//                Intent newActivity = new Intent(this, youtube.class);
+//                Intent newActivity = new Intent(this, coinedup.class);
 //                startActivity(newActivity);
                 Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
                 break;
             case 2:
-//                Intent newActivity = new Intent(this, olympiakos.class);
+//                Intent newActivity = new Intent(this, coinse.class);
 //                startActivity(newActivity);
                 Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
                 break;
             case 3:
-//                Intent newActivity = new Intent(this, karaiskaki.class);
+//                Intent newActivity = new Intent(this, bter.class);
 //                startActivity(newActivity);
                 Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
                 break;
             case 4:
-//                Intent newActivity = new Intent(this, reservetickets.class);
+//                Intent newActivity = new Intent(this, vircurex.class);
 //                startActivity(newActivity);
                 Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
                 break;
