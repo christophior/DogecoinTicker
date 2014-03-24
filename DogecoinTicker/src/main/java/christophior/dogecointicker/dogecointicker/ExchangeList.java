@@ -5,14 +5,45 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.app.ListActivity;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+import android.view.View;
 
-public class ExchangeList extends Activity {
+
+public class ExchangeList extends ListActivity {
+
+    static final String[] EXCHANGES = new String[] { "Cryptsy", "CoinedUp",
+            "Coins-E", "Bter", "Vircurex"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exchange_list);
+
+        //setListAdapter(new ArrayAdapter<String>(this, R.layout.list_mobile,
+        //		R.id.label, MOBILE_OS));
+
+        setListAdapter(new ExchangeArray(this, EXCHANGES));
+
+
     }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+
+        //get selected items
+        String selectedValue = (String) getListAdapter().getItem(position);
+        Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+
+    }
+
+
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_exchange_list);
+//    }
 
 
     @Override
