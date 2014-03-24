@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.content.*;
 import android.app.ListActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,7 +33,35 @@ public class ExchangeList extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         //get selected items
         String selectedValue = (String) getListAdapter().getItem(position);
-        Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+
+        switch(position){
+            case 0:
+                Intent newActivity = new Intent(this, cryptsy.class);
+                startActivity(newActivity);
+//                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+//                Intent newActivity = new Intent(this, youtube.class);
+//                startActivity(newActivity);
+                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+//                Intent newActivity = new Intent(this, olympiakos.class);
+//                startActivity(newActivity);
+                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+//                Intent newActivity = new Intent(this, karaiskaki.class);
+//                startActivity(newActivity);
+                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                break;
+            case 4:
+//                Intent newActivity = new Intent(this, reservetickets.class);
+//                startActivity(newActivity);
+                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     @Override
