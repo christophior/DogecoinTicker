@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/DogecoinTicker" />
+            <option value="C:\Users\Zach\Documents\GitHub\DogecoinTicker" />
+            <option value="C:\Users\Zach\Documents\GitHub\DogecoinTicker\DogecoinTicker" />
           </set>
         </option>
       </GradleProjectSettings>

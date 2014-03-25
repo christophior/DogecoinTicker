@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="list_currencies">
+        <item>@string/satoshi_currency</item>
+        <item>@string/BTC_currency</item>
+        <item>@string/mBTC_currency</item>
+    </string-array>
+
+</resources>

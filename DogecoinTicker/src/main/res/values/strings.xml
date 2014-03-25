@@ -5,5 +5,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_cryptsy">Cryptsy</string>
+    <string name="satoshi_currency">Satoshi</string>
+    <string name="BTC_currency">BTC</string>
+    <string name="mBTC_currency">mBTC</string>
+    <string name="notification_tray">Show in Notification Tray</string>
+    <string name="currency_to_use">Currency To Use With App</string>
 
 </resources>

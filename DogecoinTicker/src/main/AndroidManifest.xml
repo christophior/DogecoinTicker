@@ -8,6 +8,10 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+            android:name=".Settings"
+            android:label="Settings">
+        </activity>
+        <activity
             android:name="christophior.dogecointicker.dogecointicker.ExchangeList"
             android:label="@string/app_name" >
             <intent-filter>

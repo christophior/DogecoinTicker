@@ -80,6 +80,7 @@ public class ExchangeList extends ListActivity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
+            startActivityForResult(new Intent(this, Settings.class), 0);
             return true;
         }
         return super.onOptionsItemSelected(item);
