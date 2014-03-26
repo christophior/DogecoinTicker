@@ -37,7 +37,7 @@ public class ExchangeList extends ListActivity {
     private static String urlVircurex = "https://api.vircurex.com/api/get_highest_bid.json?base=DOGE&alt=BTC";
 
 
-    HashMap<String, Double> exchangePrices = new HashMap<String, Double>();
+    public static HashMap<String, Double> exchangePrices = new HashMap<String, Double>();
 
     public final String[] EXCHANGES = new String[] { "Cryptsy", "CoinedUp",
             "Coins-E", "Bter", "Vircurex"};

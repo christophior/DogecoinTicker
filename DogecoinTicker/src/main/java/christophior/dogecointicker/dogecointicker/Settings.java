@@ -69,11 +69,13 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
             return;
         }
 
+        double price = ExchangeList.exchangePrices.get("Cryptsy");
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
                         //.setContentTitle("My notification")
-                        .setContentText(key + " \t\t1 Doge = 999 Satoshi")
+                        .setContentText(key + " \t\t1 Doge = " + price + " mBTC")
                         .setOngoing(true);
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, cryptsy.class);

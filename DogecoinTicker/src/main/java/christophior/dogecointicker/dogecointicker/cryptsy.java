@@ -28,9 +28,6 @@ public class cryptsy extends Activity {
         setContentView(R.layout.activity_cryptsy);
     }
 
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
