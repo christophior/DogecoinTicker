@@ -13,10 +13,16 @@ import android.preference.PreferenceActivity;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 /**
  * Created by Zach on 3/24/2014.
  */
 public class Settings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private int mId = 0;
+
+    private HashMap<String, Integer> notIDs = new HashMap<String, Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,15 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     }
 
     public void createNotification(String key) {
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (notIDs.containsKey(key)) {
+            mNotificationManager.cancel(notIDs.get(key));
+            notIDs.remove(key);
+            return;
+        }
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
@@ -78,10 +93,10 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
         mBuilder.setContentIntent(resultPendingIntent);
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // mId allows you to update the notification later on.
-        mNotificationManager.notify(1, mBuilder.build());
+        notIDs.put(key, mId);
+        mId++;
+        mNotificationManager.notify(notIDs.get(key), mBuilder.build());
     }
 
 
