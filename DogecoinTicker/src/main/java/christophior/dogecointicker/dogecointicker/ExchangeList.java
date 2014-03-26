@@ -23,6 +23,10 @@ import android.util.*;
 
 public class ExchangeList extends ListActivity {
 
+    /* Credit for much of the JSON code and outline for how it works goes to Ravi Tamada at:
+       http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
+     */
+    
     private ProgressDialog pDialog;
 
     // URL to get contacts JSON
