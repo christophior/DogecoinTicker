@@ -11,11 +11,13 @@ import android.widget.TextView;
 public class ExchangeArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
+    private final int[] prices;
 
-    public ExchangeArrayAdapter(Context context, String[] values) {
+    public ExchangeArrayAdapter(Context context, String[] values, int[] prices) {
         super(context, R.layout.activity_exchange_list, values);
         this.context = context;
         this.values = values;
+        this.prices = prices;
     }
 
     @Override
@@ -25,9 +27,11 @@ public class ExchangeArrayAdapter extends ArrayAdapter<String> {
 
         View rowView = inflater.inflate(R.layout.activity_exchange_list, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.label);
+        TextView textViewPrice = (TextView) rowView.findViewById(R.id.label_price);
 
 //        ImageView imageView = (ImageView) rowView.findViewById(R.id.logo);
         textView.setText(values[position]);
+        textViewPrice.setText(prices[position] + " Satoshi");
 
         // Change icon based on name
 

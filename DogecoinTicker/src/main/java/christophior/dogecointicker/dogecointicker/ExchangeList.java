@@ -24,7 +24,8 @@ public class ExchangeList extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(new ExchangeArrayAdapter(this, EXCHANGES));
+        int[] prices = {1, 2, 3, 4, 5};
+        setListAdapter(new ExchangeArrayAdapter(this, EXCHANGES, prices));
     }
 
 
@@ -85,7 +86,6 @@ public class ExchangeList extends ListActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
             startActivityForResult(new Intent(this, Settings.class), 0);
             return true;
         }

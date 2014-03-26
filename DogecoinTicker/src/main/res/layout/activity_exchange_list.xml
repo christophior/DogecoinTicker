@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
 android:padding="5dp" >
 
 <TextView
@@ -12,7 +12,20 @@ android:padding="5dp" >
     android:textSize="30px"
     android:paddingTop="10px"
     android:paddingBottom="10px"
-    android:paddingLeft="5px">
+    android:paddingLeft="10px"
+    android:layout_alignParentLeft="true">
 </TextView>
 
-</LinearLayout>
+<TextView
+    android:id="@+id/label_price"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@+id/label"
+    android:textSize="30px"
+    android:paddingTop="10px"
+    android:paddingBottom="10px"
+    android:paddingRight="10px"
+    android:layout_alignParentRight="true">
+</TextView>
+
+</RelativeLayout>
