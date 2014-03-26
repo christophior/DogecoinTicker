@@ -1,6 +1,11 @@
 package christophior.dogecointicker.dogecointicker;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,16 +29,18 @@ public class cryptsy extends Activity {
     }
 
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.cryptsy, menu);
 
         System.out.println("creating graph");
         // init series data
-        GraphViewSeries series = new GraphViewSeries(new GraphViewData[] {
-                  new GraphViewData(1, 2.0d)
+        GraphViewSeries series = new GraphViewSeries(new GraphViewData[]{
+                new GraphViewData(1, 2.0d)
                 , new GraphViewData(2, 1.5d)
                 , new GraphViewData(3, 2.5d)
                 , new GraphViewData(4, 1.0d)}

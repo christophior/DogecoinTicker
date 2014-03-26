@@ -2,10 +2,10 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion '19.0.0'
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 17
         versionCode 1
         versionName "1.0"
@@ -21,4 +21,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('libs/GraphView-3.1.1.jar')
+    compile 'com.android.support:support-v4:+'
 }
