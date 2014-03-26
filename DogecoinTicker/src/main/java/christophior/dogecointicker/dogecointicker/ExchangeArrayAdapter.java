@@ -11,9 +11,9 @@ import android.widget.TextView;
 public class ExchangeArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
-    private final int[] prices;
+    private final double[] prices;
 
-    public ExchangeArrayAdapter(Context context, String[] values, int[] prices) {
+    public ExchangeArrayAdapter(Context context, String[] values, double[] prices) {
         super(context, R.layout.activity_exchange_list, values);
         this.context = context;
         this.values = values;
