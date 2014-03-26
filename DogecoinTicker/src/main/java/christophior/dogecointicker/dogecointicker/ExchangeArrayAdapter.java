@@ -31,7 +31,7 @@ public class ExchangeArrayAdapter extends ArrayAdapter<String> {
 
 //        ImageView imageView = (ImageView) rowView.findViewById(R.id.logo);
         textView.setText(values[position]);
-        textViewPrice.setText(prices[position] + " Satoshi");
+        textViewPrice.setText(prices[position] + " mBTC");
 
         // Change icon based on name
 
