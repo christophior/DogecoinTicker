@@ -43,7 +43,8 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Preference pref = findPreference(key);
         //Toast.makeText(this, key, Toast.LENGTH_SHORT).show();
-        createNotification(key);
+        if (!key.equals("currency_to_use"))
+            createNotification(key);
 
         if (pref instanceof ListPreference) {
             ListPreference listPref = (ListPreference) pref;
@@ -57,7 +58,8 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
                         //.setContentTitle("My notification")
-                        .setContentText(key + " 1 Doge = 999 Satoshi");
+                        .setContentText(key + " \t\t1 Doge = 999 Satoshi")
+                        .setOngoing(true);
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, cryptsy.class);
 

@@ -5,31 +5,31 @@
 
     <PreferenceCategory android:title="@string/notification_tray" >
         <CheckBoxPreference
-            android:key="cryptsy"
+            android:key="Cryptsy"
             android:title="Cryptsy"
             android:defaultValue="false"
             android:summary="" />
 
         <CheckBoxPreference
-            android:key="coinedup"
+            android:key="CoinedUp"
             android:title="CoinedUp"
             android:defaultValue="false"
             android:summary="" />
 
         <CheckBoxPreference
-            android:key="coinse"
+            android:key="Coins-E"
             android:title="Coins-E"
             android:defaultValue="false"
             android:summary="" />
 
         <CheckBoxPreference
-            android:key="bter"
+            android:key="Bter"
             android:title="Bter"
             android:defaultValue="false"
             android:summary="" />
 
         <CheckBoxPreference
-            android:key="vircurex"
+            android:key="Vircurex"
             android:title="Vircurex"
             android:defaultValue="false"
             android:summary="" />
