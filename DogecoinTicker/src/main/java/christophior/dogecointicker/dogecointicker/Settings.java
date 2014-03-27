@@ -73,17 +73,22 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
             return;
         }
 
-        double price = ExchangeList.exchangePrices.get("Cryptsy");
-
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
-                                //.setContentTitle("My notification")
                         .setContentText(key + " \t\t1 Doge = " + ExchangeList.exchangePrices.get(key)
                                 + " " + currentCurrency)
                         .setOngoing(true);
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, cryptsy.class);
+
+//        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+//        inboxStyle.setBigContentTitle("Event tracker details:");
+//        if (mId >= 1) {
+//            inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get(key)
+//                    + " " + currentCurrency);
+//            mBuilder.setStyle(inboxStyle);
+//        }
 
         // The stack builder object will contain an artificial back stack for the
         // started Activity.
