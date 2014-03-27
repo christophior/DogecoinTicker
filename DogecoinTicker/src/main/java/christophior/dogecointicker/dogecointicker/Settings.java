@@ -23,6 +23,7 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     private int mId = 0;
 
     private HashMap<String, Integer> notIDs = new HashMap<String, Integer>();
+    private String currentCurrency = "mBTC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,9 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Preference pref = findPreference(key);
+        ListPreference listPrefer = (ListPreference) findPreference("currency_to_use");
+        CharSequence currTxt = listPrefer.getEntry();
+        currentCurrency = listPrefer.getValue();
         //Toast.makeText(this, key, Toast.LENGTH_SHORT).show();
         if (!key.equals("currency_to_use"))
             createNotification(key);
@@ -74,8 +78,9 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
-                        //.setContentTitle("My notification")
-                        .setContentText(key + " \t\t1 Doge = " + price + " mBTC")
+                                //.setContentTitle("My notification")
+                        .setContentText(key + " \t\t1 Doge = " + ExchangeList.exchangePrices.get(key)
+                                + " " + currentCurrency)
                         .setOngoing(true);
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, cryptsy.class);
