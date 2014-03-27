@@ -35,6 +35,7 @@ public class cryptsy extends Activity {
     protected static ArrayList<points> pointList = new ArrayList<points>();
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphViewData>();
     private ProgressDialog pDialog;
+    public static double highPrice = -1.0, lowPrice = 9999.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +187,12 @@ public class cryptsy extends Activity {
 
             LinearLayout layout = (LinearLayout) findViewById(R.id.graph);
             layout.addView(graphView);
+
+            TextView tv_high = (TextView) findViewById(R.id.high_text);
+            tv_high.setText(String.valueOf(highPrice));
+
+            TextView tv_low = (TextView) findViewById(R.id.low_text);
+            tv_low.setText(String.valueOf(lowPrice));
         }
 
         public double formatPricemBTC(String price){
@@ -204,8 +211,13 @@ class points{
 
     public points(String d, double p){
         date = d;
-        price = p;
+        price = p*1000;
         time = generateTimeDouble(d);
+
+        if (price > cryptsy.highPrice)
+            cryptsy.highPrice = price;
+        if (price < cryptsy.lowPrice)
+            cryptsy.lowPrice = price;
     }
 
     public double generateTimeDouble(String d){
