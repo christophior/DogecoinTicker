@@ -2,6 +2,7 @@
 <resources>
 
     <string-array name="list_currencies">
+        <!-- Only mBTC currently works  -->
         <item>@string/satoshi_currency</item>
         <item>@string/BTC_currency</item>
         <item>@string/mBTC_currency</item>
