@@ -218,7 +218,6 @@ public class ExchangeList extends ListActivity {
             String formattedPrice = df.format(result);
             return Double.parseDouble(formattedPrice);
         }
-
     }
 
 }

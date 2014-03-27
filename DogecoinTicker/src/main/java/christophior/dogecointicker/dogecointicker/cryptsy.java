@@ -3,9 +3,11 @@ package christophior.dogecointicker.dogecointicker;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,12 +21,22 @@ import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+
 
 public class cryptsy extends Activity {
+
+    private static String urlCryptsy = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132";
+
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        (new GetJson()).execute();
         setContentView(R.layout.activity_cryptsy);
     }
 
@@ -82,4 +94,67 @@ public class cryptsy extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     * Async task class to get json by making HTTP call
+     * */
+    private class GetJson extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            // Showing progress dialog
+            pDialog = new ProgressDialog(cryptsy.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+//
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            // Creating service handler class instance
+            ServiceHandler sh = new ServiceHandler();
+
+            // Making a request to url and getting response
+            String jsonCryptsy = sh.makeServiceCall(urlCryptsy, ServiceHandler.GET);
+            if (jsonCryptsy != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonCryptsy);
+                    JSONObject dogeCryptsy = ((jsonObj.getJSONObject("return")).getJSONObject("markets")).getJSONObject("DOGE");
+                    String cryptsyPrice = dogeCryptsy.getString("lasttradeprice");
+                    System.out.println("Cryptsy Price: " + cryptsyPrice);
+//                    exchangePrices.put("Cryptsy", formatPricemBTC(cryptsyPrice));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.e("ServiceHandler", "Couldn't get any data from the url");
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+//            super.onPostExecute(result);
+//            // Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+//            /**
+//             * Updating parsed JSON data into view
+//             * */
+//            "Cryptsy", "CoinedUp","Coins-E", "Bter", "Vircurex"
+//            double[] prices = {exchangePrices.get("Cryptsy"), exchangePrices.get("CoinedUp"),
+//                    exchangePrices.get("Coins-E"), exchangePrices.get("Bter"), exchangePrices.get("Vircurex")};
+//            setListAdapter(new ExchangeArrayAdapter(ExchangeList.this, EXCHANGES, prices));
+        }
+
+        public double formatPricemBTC(String price){
+            DecimalFormat df = new DecimalFormat("0.00000");
+            double result = Double.parseDouble(price) * 1000;
+            String formattedPrice = df.format(result);
+            return Double.parseDouble(formattedPrice);
+        }
+    }
 }
