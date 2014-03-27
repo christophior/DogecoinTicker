@@ -15,9 +15,6 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-/**
- * Created by Zach on 3/24/2014.
- */
 public class Settings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private int mId = 0;
