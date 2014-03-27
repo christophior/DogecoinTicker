@@ -19,6 +19,7 @@ import android.app.*;
 import org.json.*;
 import java.util.*;
 import android.util.*;
+import java.text.*;
 
 
 public class ExchangeList extends ListActivity {
@@ -48,7 +49,7 @@ public class ExchangeList extends ListActivity {
         super.onCreate(savedInstanceState);
         initHashMap();
         (new GetJson()).execute();
-        double[] prices = {1.0, 2.0, 3.0, 4.0, 5.0};
+        double[] prices = {0.0, 0.0, 0.0, 0.0, 0.0};
         setListAdapter(new ExchangeArrayAdapter(this, EXCHANGES, prices));
     }
 
@@ -123,10 +124,10 @@ public class ExchangeList extends ListActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 //            // Showing progress dialog
-////            pDialog = new ProgressDialog(ExchangeList.this);
-////            pDialog.setMessage("Please wait...");
-////            pDialog.setCancelable(false);
-////            pDialog.show();
+//            pDialog = new ProgressDialog(ExchangeList.this);
+//            pDialog.setMessage("Please wait...");
+//            pDialog.setCancelable(false);
+//            pDialog.show();
 //
         }
 
@@ -137,15 +138,13 @@ public class ExchangeList extends ListActivity {
 
             // Making a request to url and getting response
             String jsonCryptsy = sh.makeServiceCall(urlCryptsy, ServiceHandler.GET);
-//            System.out.println("Response: > " + jsonCryptsy);
-
             if (jsonCryptsy != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonCryptsy);
                     JSONObject dogeCryptsy = ((jsonObj.getJSONObject("return")).getJSONObject("markets")).getJSONObject("DOGE");
                     String cryptsyPrice = dogeCryptsy.getString("lasttradeprice");
                     System.out.println("Cryptsy Price: " + cryptsyPrice);
-                    exchangePrices.put("Cryptsy", Double.parseDouble(cryptsyPrice) * 1000);
+                    exchangePrices.put("Cryptsy", formatPricemBTC(cryptsyPrice));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -154,13 +153,12 @@ public class ExchangeList extends ListActivity {
             }
 
             String jsonCoinse = sh.makeServiceCall(urlCoinse, ServiceHandler.GET);
-
             if (jsonCoinse != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonCoinse);
                     String coinsePrice = jsonObj.getString("ltp");
                     System.out.println("Coins-E Price: " + coinsePrice);
-                    exchangePrices.put("Coins-E", Double.parseDouble(coinsePrice));
+                    exchangePrices.put("Coins-E", formatPricemBTC(coinsePrice));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -169,13 +167,12 @@ public class ExchangeList extends ListActivity {
             }
 
             String jsonBter = sh.makeServiceCall(urlBter, ServiceHandler.GET);
-
             if (jsonBter != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonBter);
                     String bterPrice = jsonObj.getString("avg");
                     System.out.println("Bter Price: " + bterPrice);
-                    exchangePrices.put("Bter", Double.parseDouble(bterPrice));
+                    exchangePrices.put("Bter", formatPricemBTC(bterPrice));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -184,13 +181,12 @@ public class ExchangeList extends ListActivity {
             }
 
             String jsonVircurex = sh.makeServiceCall(urlVircurex, ServiceHandler.GET);
-
             if (jsonVircurex != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonVircurex);
                     String vircurexPrice = jsonObj.getString("value");
                     System.out.println("Vircurex Price: " + vircurexPrice);
-                    exchangePrices.put("Vircurex", Double.parseDouble(vircurexPrice));
+                    exchangePrices.put("Vircurex", formatPricemBTC(vircurexPrice));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -208,12 +204,19 @@ public class ExchangeList extends ListActivity {
 //            if (pDialog.isShowing())
 //                pDialog.dismiss();
 //            /**
-//             * Updating parsed JSON data into ListView
+//             * Updating parsed JSON data into view
 //             * */
-//                    ExchangeList.this, contactList,
-//                    R.layout.list_item, new String[] { TAG_NAME, TAG_EMAIL, TAG_PHONE_MOBILE }, new int[] { R.id.name, R.id.email, R.id.mobile });
-//
-//            setListAdapter(adapter);
+//            "Cryptsy", "CoinedUp","Coins-E", "Bter", "Vircurex"
+            double[] prices = {exchangePrices.get("Cryptsy"), exchangePrices.get("CoinedUp"),
+                    exchangePrices.get("Coins-E"), exchangePrices.get("Bter"), exchangePrices.get("Vircurex")};
+            setListAdapter(new ExchangeArrayAdapter(ExchangeList.this, EXCHANGES, prices));
+        }
+
+        public double formatPricemBTC(String price){
+            DecimalFormat df = new DecimalFormat("0.0000");
+            double result = Double.parseDouble(price) * 1000;
+            String formattedPrice = df.format(result);
+            return Double.parseDouble(formattedPrice);
         }
 
     }
