@@ -93,7 +93,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="5"
-        android:background="#888888"/>
+        android:background="#CC5500"/>
 
     <LinearLayout
         android:id="@+id/stats"
@@ -234,20 +234,17 @@
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="0dip"
-                android:layout_height="fill_parent"
-                android:background="#999999"/>
+                android:layout_height="fill_parent"/>
 
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="0dip"
-                android:layout_height="fill_parent"
-                android:background="#cc5500"/>
+                android:layout_height="fill_parent"/>
 
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="0dip"
-                android:layout_height="fill_parent"
-                android:background="#999999"/>
+                android:layout_height="fill_parent"/>
 
         </LinearLayout>
 

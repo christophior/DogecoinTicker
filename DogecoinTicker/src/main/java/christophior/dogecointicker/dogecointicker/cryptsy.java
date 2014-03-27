@@ -41,7 +41,7 @@ public class cryptsy extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         (new GetJson()).execute();
-        setContentView(R.layout.activity_cryptsy);
+        setContentView(R.layout.activity_exchange);
     }
 
     @Override
@@ -175,15 +175,15 @@ public class cryptsy extends Activity {
 //        graphView.getGraphViewStyle().setGridColor(Color.GREEN);
 //        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-//        graphView.getGraphViewStyle().setTextSize(getResources().getDimension(R.dimen.big));
-//        graphView.getGraphViewStyle().setNumHorizontalLabels(5);
-//        graphView.getGraphViewStyle().setNumVerticalLabels(4);
-//        graphView.getGraphViewStyle().setVerticalLabelsWidth(300);
+//        graphView.getGraphViewStyle().setTextSize(getResources().getDimension(2));
+        graphView.getGraphViewStyle().setNumHorizontalLabels(5);
+        graphView.getGraphViewStyle().setNumVerticalLabels(4);
+//        graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
             // set view port, start=2, size=40
 //        graphView.setViewPort(2, 40);
 //        graphView.setScrollable(true);
             // optional - activate scaling / zooming
-        graphView.setScalable(true);
+//        graphView.setScalable(true);
 
             LinearLayout layout = (LinearLayout) findViewById(R.id.graph);
             layout.addView(graphView);

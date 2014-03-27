@@ -73,22 +73,22 @@ public class ExchangeList extends ListActivity {
             case 1:
 //                Intent newActivity = new Intent(this, coinedup.class);
 //                startActivity(newActivity);
-                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 2:
 //                Intent newActivity = new Intent(this, coinse.class);
 //                startActivity(newActivity);
-                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
 //                Intent newActivity = new Intent(this, bter.class);
 //                startActivity(newActivity);
-                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 4:
 //                Intent newActivity = new Intent(this, vircurex.class);
 //                startActivity(newActivity);
-                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
