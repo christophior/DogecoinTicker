@@ -213,7 +213,7 @@ public class ExchangeList extends ListActivity {
         }
 
         public double formatPricemBTC(String price){
-            DecimalFormat df = new DecimalFormat("0.0000");
+            DecimalFormat df = new DecimalFormat("0.00000");
             double result = Double.parseDouble(price) * 1000;
             String formattedPrice = df.format(result);
             return Double.parseDouble(formattedPrice);
