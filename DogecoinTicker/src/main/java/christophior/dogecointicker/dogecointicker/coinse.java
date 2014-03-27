@@ -48,7 +48,7 @@ public class coinse extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.cryptsy, menu);
+//        getMenuInflater().inflate(R.menu.cryptsy, menu);
 
 //        System.out.println("creating graph");
 //        // init series data
@@ -138,6 +138,10 @@ public class coinse extends Activity {
                     GraphData = new ArrayList<GraphViewData>();
                     for (points p : pointList){
                         GraphData.add(new GraphViewData(p.time, p.price));
+                        if (p.price > highPrice)
+                            highPrice = p.price;
+                        if (p.price < cryptsy.lowPrice)
+                            lowPrice = p.price;
                     }
 
 //                    exchangePrices.put("Cryptsy", formatPricemBTC(cryptsyPrice));
@@ -176,7 +180,7 @@ public class coinse extends Activity {
 //        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
 //        graphView.getGraphViewStyle().setTextSize(getResources().getDimension(2));
-            graphView.getGraphViewStyle().setNumHorizontalLabels(5);
+            graphView.getGraphViewStyle().setNumHorizontalLabels(4);
             graphView.getGraphViewStyle().setNumVerticalLabels(4);
 //        graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
             // set view port, start=2, size=40

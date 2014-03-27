@@ -5,6 +5,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_cryptsy">Cryptsy</string>
+    <string name="title_activity_coinedup">CoinedUp</string>
+    <string name="title_activity_coinse">Coins-E</string>
+    <string name="title_activity_bter">Bter</string>
+    <string name="title_activity_vircurex">Vircurex</string>
     <string name="satoshi_currency">Satoshi</string>
     <string name="BTC_currency">BTC</string>
     <string name="mBTC_currency">mBTC</string>

@@ -9,11 +9,11 @@ public class points{
         date = d;
         price = p*1000;
         time = generateTimeDouble(d);
+    }
 
-        if (price > cryptsy.highPrice)
-            cryptsy.highPrice = price;
-        if (price < cryptsy.lowPrice)
-            cryptsy.lowPrice = price;
+    public points(double t, double p){
+        price = p*1000;
+        time = t;
     }
 
     public double generateTimeDouble(String d){

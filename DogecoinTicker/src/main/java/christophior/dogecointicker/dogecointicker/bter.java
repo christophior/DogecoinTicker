@@ -31,7 +31,8 @@ import java.util.*;
 
 public class bter extends Activity {
 
-    private static String urlCryptsy = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132";
+    private static String url = "http://data.bter.com/api/1/trade/doge_btc/1";
+
     protected static ArrayList<points> pointList = new ArrayList<points>();
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphViewData>();
     private ProgressDialog pDialog;
@@ -48,7 +49,7 @@ public class bter extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.cryptsy, menu);
+//        getMenuInflater().inflate(R.menu.cryptsy, menu);
 
 //        System.out.println("creating graph");
 //        // init series data
@@ -121,23 +122,36 @@ public class bter extends Activity {
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
-            String jsonCryptsy = sh.makeServiceCall(urlCryptsy, ServiceHandler.GET);
-            if (jsonCryptsy != null) {
+            String jsonBter = sh.makeServiceCall(url, ServiceHandler.GET);
+            String tickerData = sh.makeServiceCall("http://data.bter.com/api/1/ticker/doge_btc/", ServiceHandler.GET);
+
+            if (tickerData != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonCryptsy);
-                    JSONObject dogeCryptsy = ((jsonObj.getJSONObject("return")).getJSONObject("markets")).getJSONObject("DOGE");
-                    String cryptsyPrice = dogeCryptsy.getString("lasttradeprice");
-                    System.out.println("Cryptsy Price: " + cryptsyPrice);
-                    JSONArray trades = (((jsonObj.getJSONObject("return")).getJSONObject("markets")).getJSONObject("DOGE")).getJSONArray("recenttrades");
+                    JSONObject jsonObj = new JSONObject(tickerData);
+                    highPrice = formatPricemBTC(jsonObj.getString("high"));
+                    lowPrice = formatPricemBTC(jsonObj.getString("low"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.e("ServiceHandler", "Couldn't get any data from the url");
+            }
+
+            if (jsonBter != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonBter);
+                    JSONArray trades = jsonObj.getJSONArray("data");
                     for (int i = trades.length()-1; i >= 0; i--){
                         JSONObject t = trades.getJSONObject(i);
-                        pointList.add(new points(t.getString("time"), t.getDouble("price")));
-                        System.out.println("added trade(" + t.getString("id") + ") to list of points");
+                        pointList.add(new points(t.getDouble("date"), t.getDouble("price")));
+                        System.out.println("added bter trade(" + t.getString("tid") + ") to list of points");
                     }
 
                     GraphData = new ArrayList<GraphViewData>();
                     for (points p : pointList){
-                        GraphData.add(new GraphViewData(p.time, p.price));
+                        GraphData.add(new GraphViewData(p.time-1387860000, p.price));
+                        System.out.println("time: ");
+                        System.out.print(p.time);
                     }
 
 //                    exchangePrices.put("Cryptsy", formatPricemBTC(cryptsyPrice));
@@ -176,7 +190,7 @@ public class bter extends Activity {
 //        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
 //        graphView.getGraphViewStyle().setTextSize(getResources().getDimension(2));
-            graphView.getGraphViewStyle().setNumHorizontalLabels(5);
+            graphView.getGraphViewStyle().setNumHorizontalLabels(4);
             graphView.getGraphViewStyle().setNumVerticalLabels(4);
 //        graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
             // set view port, start=2, size=40

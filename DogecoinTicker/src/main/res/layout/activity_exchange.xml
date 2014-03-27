@@ -115,7 +115,7 @@
                 android:layout_height="0dip"
                 android:layout_weight="2">
                 <TextView
-                    android:text="2.3%"
+                    android:text="N/A"
                     android:textSize="@dimen/stat_numbers"
                     android:gravity="center"
                     android:layout_width="match_parent"
@@ -147,7 +147,7 @@
                 android:layout_weight="2">
                 <TextView
                     android:id="@+id/high_text"
-                    android:text="159"
+                    android:text="N/A"
                     android:textSize="@dimen/stat_numbers"
                     android:gravity="center"
                     android:layout_width="match_parent"
@@ -180,7 +180,7 @@
                 android:layout_weight="2">
                 <TextView
                     android:id="@+id/low_text"
-                    android:text="152"
+                    android:text="N/A"
                     android:textSize="@dimen/stat_numbers"
                     android:gravity="center"
                     android:layout_width="match_parent"
