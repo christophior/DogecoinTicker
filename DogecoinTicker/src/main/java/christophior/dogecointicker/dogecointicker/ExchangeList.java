@@ -66,8 +66,8 @@ public class ExchangeList extends ListActivity {
 
         switch(position){
             case 0:
-                Intent newActivity = new Intent(this, cryptsy.class);
-                startActivity(newActivity);
+                Intent newCryptsyActivity = new Intent(this, cryptsy.class);
+                startActivity(newCryptsyActivity);
 //                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
                 break;
             case 1:
@@ -76,19 +76,19 @@ public class ExchangeList extends ListActivity {
                 Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 2:
-//                Intent newActivity = new Intent(this, coinse.class);
-//                startActivity(newActivity);
-                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
+                Intent newCoinseActivity = new Intent(this, coinse.class);
+                startActivity(newCoinseActivity);
+//                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
-//                Intent newActivity = new Intent(this, bter.class);
-//                startActivity(newActivity);
-                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
+                Intent newBterActivity = new Intent(this, bter.class);
+                startActivity(newBterActivity);
+//                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 4:
-//                Intent newActivity = new Intent(this, vircurex.class);
-//                startActivity(newActivity);
-                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
+                Intent newVircurexActivity = new Intent(this, vircurex.class);
+                startActivity(newVircurexActivity);
+//                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

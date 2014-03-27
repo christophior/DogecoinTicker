@@ -29,7 +29,7 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 
-public class cryptsy extends Activity {
+public class vircurex extends Activity {
 
     private static String urlCryptsy = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132";
     protected static ArrayList<points> pointList = new ArrayList<points>();
@@ -108,7 +108,7 @@ public class cryptsy extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
 //            // Showing progress dialog
-            pDialog = new ProgressDialog(cryptsy.this);
+            pDialog = new ProgressDialog(vircurex.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -166,7 +166,7 @@ public class cryptsy extends Activity {
             GraphViewSeries series = new GraphViewSeries(GraphData.toArray(new GraphViewData[GraphData.size()]));
 
             GraphView graphView = new LineGraphView(
-                    cryptsy.this // context
+                    vircurex.this // context
                     , "" // heading
             );
 
@@ -176,8 +176,8 @@ public class cryptsy extends Activity {
 //        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
 //        graphView.getGraphViewStyle().setTextSize(getResources().getDimension(2));
-        graphView.getGraphViewStyle().setNumHorizontalLabels(5);
-        graphView.getGraphViewStyle().setNumVerticalLabels(4);
+            graphView.getGraphViewStyle().setNumHorizontalLabels(5);
+            graphView.getGraphViewStyle().setNumVerticalLabels(4);
 //        graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
             // set view port, start=2, size=40
 //        graphView.setViewPort(2, 40);
