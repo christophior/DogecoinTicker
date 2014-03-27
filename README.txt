@@ -14,6 +14,7 @@ Not Completed:
  - Allow user to change range of graph
  - Implement Satoshi and BTC and allow the use of CoinedUp exchange upon receiving API key
  - Notifications when price reaches user set level
+ - Coins-E and Vircurex graphs are just copies of Cryptsy
  - Currently, the graphs can result in odd looking shapes. We are still looking in to how to effectively parse from    each exchange's API in order to make sure all of the graphs are always accurate and readable to the user.
 
 Besides the use of API's from various exchanges, the only major chunk of code used within the app from an external source was the initial code to use JSON to parse the API's. This was credited in our code, and can be found at http://www.androidhive.info/2012/01/android-json-parsing-tutorial/. Also, the sections from the Settings and Notification classes are heavily based off of the official Android Developer website.
