@@ -161,14 +161,14 @@ public class cryptsy extends Activity {
             LinearLayout layout = (LinearLayout) findViewById(R.id.graph);
             layout.addView(graphView);
 
-            TextView tv_high = (TextView) findViewById(R.id.high_text);
-            tv_high.setText(String.valueOf(highPrice));
-
-            TextView tv_low = (TextView) findViewById(R.id.low_text);
-            tv_low.setText(String.valueOf(lowPrice));
-
-            TextView tv_change = (TextView) findViewById(R.id.change_text);
-            tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
+//            TextView tv_high = (TextView) findViewById(R.id.high_text);
+//            tv_high.setText(String.valueOf(highPrice));
+//
+//            TextView tv_low = (TextView) findViewById(R.id.low_text);
+//            tv_low.setText(String.valueOf(lowPrice));
+//
+//            TextView tv_change = (TextView) findViewById(R.id.change_text);
+//            tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
         }
 
         public double formatPricemBTC(Double price){
