@@ -31,11 +31,7 @@ public class ExchangeList extends ListActivity {
     private ProgressDialog pDialog;
 
     // URL to get contacts JSON
-    private static String urlCryptsy = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132";
-    private static String urlCoinedup = "https://api.coinedup.com/markets";
-    private static String urlCoinse = "https://www.coins-e.com/api/v2/market/DOGE_BTC/depth/";
-    private static String urlBter = "http://data.bter.com/api/1/ticker/doge_btc";
-    private static String urlVircurex = "https://api.vircurex.com/api/get_highest_bid.json?base=DOGE&alt=BTC";
+    private static String urlMarketPrices = "http://doge.yottabyte.nu/json/markets.json";
 
 
     public static HashMap<String, Double> exchangePrices = new HashMap<String, Double>();
@@ -131,65 +127,48 @@ public class ExchangeList extends ListActivity {
 //
         }
 
+        private void updateExchangePrice(String exchange, double price){
+
+            int coefficient = 1000;
+
+            if (exchange.equals("cryptsy")){
+                exchangePrices.put("Cryptsy", coefficient*price);
+            } else if (exchange.equals("coinedup")){
+                exchangePrices.put("CoinedUp", coefficient*price);
+            } else if (exchange.equals("coins-e")){
+                exchangePrices.put("Coins-E", coefficient*price);
+            } else if (exchange.equals("bter")){
+                exchangePrices.put("Bter", coefficient*price);
+            } else if (exchange.equals("vircurex")){
+                exchangePrices.put("Vircurex", coefficient*price);
+            }
+        }
+
         @Override
         protected Void doInBackground(Void... arg0) {
             // Creating service handler class instance
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
-            String jsonCryptsy = sh.makeServiceCall(urlCryptsy, ServiceHandler.GET);
-            if (jsonCryptsy != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonCryptsy);
-                    JSONObject dogeCryptsy = ((jsonObj.getJSONObject("return")).getJSONObject("markets")).getJSONObject("DOGE");
-                    String cryptsyPrice = dogeCryptsy.getString("lasttradeprice");
-                    System.out.println("Cryptsy Price: " + cryptsyPrice);
-                    exchangePrices.put("Cryptsy", formatPricemBTC(cryptsyPrice));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Log.e("ServiceHandler", "Couldn't get any data from the url");
-            }
+            String jsonMarketPrice = sh.makeServiceCall(urlMarketPrices, ServiceHandler.GET);
 
-            String jsonCoinse = sh.makeServiceCall(urlCoinse, ServiceHandler.GET);
-            if (jsonCoinse != null) {
+            if (jsonMarketPrice != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonCoinse);
-                    String coinsePrice = jsonObj.getString("ltp");
-                    System.out.println("Coins-E Price: " + coinsePrice);
-                    exchangePrices.put("Coins-E", formatPricemBTC(coinsePrice));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Log.e("ServiceHandler", "Couldn't get any data from the url");
-            }
+                    JSONArray jsonArray = new JSONArray(jsonMarketPrice);
 
-            String jsonBter = sh.makeServiceCall(urlBter, ServiceHandler.GET);
-            if (jsonBter != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonBter);
-                    String bterPrice = jsonObj.getString("avg");
-                    System.out.println("Bter Price: " + bterPrice);
-                    exchangePrices.put("Bter", formatPricemBTC(bterPrice));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Log.e("ServiceHandler", "Couldn't get any data from the url");
-            }
+                    for (int i=0; i<jsonArray.length(); i++){
+                        JSONObject singleMarket = jsonArray.getJSONObject(i);
+                        updateExchangePrice(singleMarket.getString("m"), singleMarket.getDouble("l"));
+                    }
 
-            String jsonVircurex = sh.makeServiceCall(urlVircurex, ServiceHandler.GET);
-            if (jsonVircurex != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonVircurex);
-                    String vircurexPrice = jsonObj.getString("value");
-                    System.out.println("Vircurex Price: " + vircurexPrice);
-                    exchangePrices.put("Vircurex", formatPricemBTC(vircurexPrice));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                    System.out.println("Cryptsy Price: " + exchangePrices.get("Cryptsy"));
+                    System.out.println("CoinedUp Price: " + exchangePrices.get("CoinedUp"));
+                    System.out.println("Coins-E Price: " + exchangePrices.get("Coins-E"));
+                    System.out.println("Bter Price: " + exchangePrices.get("Bter"));
+                    System.out.println("Vircurex Price: " + exchangePrices.get("Vircurex"));
+
+                } catch (JSONException e) { e.printStackTrace(); }
+
             } else {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
             }
