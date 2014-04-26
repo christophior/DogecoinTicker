@@ -31,7 +31,7 @@ import java.util.*;
 
 public class cryptsy extends Activity {
 
-    private static String urlCryptsy = "http://doge.yottabyte.nu/json/cryptsy/24h.json";
+    private static String urlExchange = "http://doge.yottabyte.nu/json/cryptsy/24h.json";
     protected static ArrayList<points> pointList = new ArrayList<points>();
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphViewData>();
     private ProgressDialog pDialog;
@@ -46,42 +46,6 @@ public class cryptsy extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.cryptsy, menu);
-
-//        System.out.println("creating graph");
-//        // init series data
-//        GraphViewSeries series = new GraphViewSeries(new GraphViewData[]{
-//                new GraphViewData(1, 2.0)
-//                , new GraphViewData(2, 1.5)
-//                , new GraphViewData(3, 2.5)
-//                , new GraphViewData(4, 1.0)}
-//        );
-//
-//        GraphView graphView = new LineGraphView(
-//                this // context
-//                , "" // heading
-//        );
-//
-//        graphView.addSeries(series); // data
-//        // set styles
-////        graphView.getGraphViewStyle().setGridColor(Color.GREEN);
-////        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
-////        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-////        graphView.getGraphViewStyle().setTextSize(getResources().getDimension(R.dimen.big));
-////        graphView.getGraphViewStyle().setNumHorizontalLabels(5);
-////        graphView.getGraphViewStyle().setNumVerticalLabels(4);
-////        graphView.getGraphViewStyle().setVerticalLabelsWidth(300);
-//        // set view port, start=2, size=40
-////        graphView.setViewPort(2, 40);
-////        graphView.setScrollable(true);
-//        // optional - activate scaling / zooming
-////        graphView.setScalable(true);
-//
-//        LinearLayout layout = (LinearLayout) findViewById(R.id.graph);
-//        layout.addView(graphView);
-
         return true;
     }
 
@@ -121,10 +85,10 @@ public class cryptsy extends Activity {
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
-            String jsonCryptsy = sh.makeServiceCall(urlCryptsy, ServiceHandler.GET);
-            if (jsonCryptsy != null) {
+            String jsonData = sh.makeServiceCall(urlExchange, ServiceHandler.GET);
+            if (jsonData != null) {
                 try {
-                    JSONArray jsonArrayRoot = new JSONArray(jsonCryptsy);
+                    JSONArray jsonArrayRoot = new JSONArray(jsonData);
                     JSONArray trades = jsonArrayRoot.getJSONArray(0);
 
                     System.out.println("getting trades");
@@ -136,6 +100,8 @@ public class cryptsy extends Activity {
                         time /= 10000;
                         time -= 139800000;
                         GraphData.add(new GraphViewData(time, price));
+
+                        // replace price with new format for high and low
                         price = formatPricemBTC(t.getDouble(1));
                         if (price > highPrice)
                             highPrice = price;
