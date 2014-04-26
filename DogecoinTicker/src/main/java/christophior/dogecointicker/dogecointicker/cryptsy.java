@@ -31,7 +31,7 @@ import java.util.*;
 
 public class cryptsy extends Activity {
 
-    private static String urlCryptsy = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132";
+    private static String urlCryptsy = "http://doge.yottabyte.nu/json/cryptsy/24h.json";
     protected static ArrayList<points> pointList = new ArrayList<points>();
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphViewData>();
     private ProgressDialog pDialog;
@@ -124,27 +124,27 @@ public class cryptsy extends Activity {
             String jsonCryptsy = sh.makeServiceCall(urlCryptsy, ServiceHandler.GET);
             if (jsonCryptsy != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonCryptsy);
-                    JSONObject dogeCryptsy = ((jsonObj.getJSONObject("return")).getJSONObject("markets")).getJSONObject("DOGE");
-                    String cryptsyPrice = dogeCryptsy.getString("lasttradeprice");
-                    System.out.println("Cryptsy Price: " + cryptsyPrice);
-                    JSONArray trades = (((jsonObj.getJSONObject("return")).getJSONObject("markets")).getJSONObject("DOGE")).getJSONArray("recenttrades");
-                    for (int i = trades.length()-1; i >= 0; i--){
-                        JSONObject t = trades.getJSONObject(i);
-                        pointList.add(new points(t.getString("time"), t.getDouble("price")));
-                        System.out.println("added trade(" + t.getString("id") + ") to list of points");
-                    }
+                    JSONArray jsonArrayRoot = new JSONArray(jsonCryptsy);
+                    JSONArray trades = jsonArrayRoot.getJSONArray(0);
 
+                    System.out.println("getting trades");
                     GraphData = new ArrayList<GraphViewData>();
-                    for (points p : pointList){
-                        GraphData.add(new GraphViewData(p.time, p.price));
-                        if (p.price > highPrice)
-                            highPrice = p.price;
-                        if (p.price < cryptsy.lowPrice)
-                            lowPrice = p.price;
+
+                    for (int i=0; i<trades.length(); ++i){
+                        JSONArray t = trades.getJSONArray(i);
+                        double time = t.getDouble(0), price = 1000*t.getDouble(1);
+                        time /= 10000;
+                        time -= 139800000;
+                        GraphData.add(new GraphViewData(time, price));
+                        price = formatPricemBTC(t.getDouble(1));
+                        if (price > highPrice)
+                            highPrice = price;
+                        if (price < lowPrice)
+                            lowPrice = price;
+
+                        System.out.println("added trade(" + time + ", " + price + ") to graph");
                     }
 
-//                    exchangePrices.put("Cryptsy", formatPricemBTC(cryptsyPrice));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -180,8 +180,8 @@ public class cryptsy extends Activity {
 //        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
 //        graphView.getGraphViewStyle().setTextSize(getResources().getDimension(2));
-        graphView.getGraphViewStyle().setNumHorizontalLabels(4);
-        graphView.getGraphViewStyle().setNumVerticalLabels(4);
+        graphView.getGraphViewStyle().setNumHorizontalLabels(0);
+        graphView.getGraphViewStyle().setNumVerticalLabels(0);
 //        graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
             // set view port, start=2, size=40
 //        graphView.setViewPort(2, 40);
@@ -199,9 +199,9 @@ public class cryptsy extends Activity {
             tv_low.setText(String.valueOf(lowPrice));
         }
 
-        public double formatPricemBTC(String price){
+        public double formatPricemBTC(Double price){
             DecimalFormat df = new DecimalFormat("0.00000");
-            double result = Double.parseDouble(price) * 1000;
+            double result = price * 1000;
             String formattedPrice = df.format(result);
             return Double.parseDouble(formattedPrice);
         }
