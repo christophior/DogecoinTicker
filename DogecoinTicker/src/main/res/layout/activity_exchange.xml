@@ -115,6 +115,7 @@
                 android:layout_height="0dip"
                 android:layout_weight="2">
                 <TextView
+                    android:id="@+id/change_text"
                     android:text="N/A"
                     android:textSize="@dimen/stat_numbers"
                     android:gravity="center"

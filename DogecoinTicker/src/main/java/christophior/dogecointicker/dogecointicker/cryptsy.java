@@ -35,7 +35,7 @@ public class cryptsy extends Activity {
     protected static ArrayList<points> pointList = new ArrayList<points>();
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphViewData>();
     private ProgressDialog pDialog;
-    public static double highPrice = -1.0, lowPrice = 9999.0;
+    public static double highPrice = -1.0, lowPrice = 9999.0, percentChange = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +110,9 @@ public class cryptsy extends Activity {
 
                         System.out.println("added trade(" + time + ", " + price + ") to graph");
                     }
+                    double first = (trades.getJSONArray(0)).getDouble(1);
+                    double last = (trades.getJSONArray(trades.length()-1)).getDouble(1);
+                    percentChange = (last-first)/(first)*100;
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -142,18 +145,18 @@ public class cryptsy extends Activity {
 
             graphView.addSeries(series); // data
             // set styles
-//        graphView.getGraphViewStyle().setGridColor(Color.GREEN);
+        graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
 //        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-//        graphView.getGraphViewStyle().setTextSize(getResources().getDimension(2));
-        graphView.getGraphViewStyle().setNumHorizontalLabels(0);
-        graphView.getGraphViewStyle().setNumVerticalLabels(0);
-//        graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
+        graphView.getGraphViewStyle().setTextSize(1);
+        graphView.getGraphViewStyle().setNumHorizontalLabels(1);
+        graphView.getGraphViewStyle().setNumVerticalLabels(15);
+        graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
             // set view port, start=2, size=40
 //        graphView.setViewPort(2, 40);
 //        graphView.setScrollable(true);
             // optional - activate scaling / zooming
-//        graphView.setScalable(true);
+        graphView.setScalable(true);
 
             LinearLayout layout = (LinearLayout) findViewById(R.id.graph);
             layout.addView(graphView);
@@ -163,6 +166,9 @@ public class cryptsy extends Activity {
 
             TextView tv_low = (TextView) findViewById(R.id.low_text);
             tv_low.setText(String.valueOf(lowPrice));
+
+            TextView tv_change = (TextView) findViewById(R.id.change_text);
+            tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
         }
 
         public double formatPricemBTC(Double price){
