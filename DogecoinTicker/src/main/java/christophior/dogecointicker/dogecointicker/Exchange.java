@@ -15,10 +15,12 @@ import android.widget.*;
 import android.graphics.Color;
 import android.util.*;
 
-import com.jjoe64.graphview.BarGraphView;
+
+import com.jjoe64.graphview.*;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 import com.jjoe64.graphview.LineGraphView;
 
 import org.json.JSONArray;
@@ -32,7 +34,6 @@ import java.util.*;
 public class Exchange extends Activity {
 
     private static String urlExchange = "";
-    protected static ArrayList<points> pointList = new ArrayList<points>();
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphViewData>();
     private ProgressDialog pDialog;
     public static double highPrice = -1.0, lowPrice = 9999.0, percentChange = 0.0;
@@ -145,9 +146,16 @@ public class Exchange extends Activity {
 //             * */
 //
             System.out.println("creating graph");
-            // init series data
-            GraphViewSeries series = new GraphViewSeries(GraphData.toArray(new GraphViewData[GraphData.size()]));
+//            GraphViewSeriesStyle seriesStyle = new GraphViewSeriesStyle();
+//            seriesStyle.setValueDependentColor(new ValueDependentColor() {
+//                @Override
+//                public int get(GraphViewDataInterface data) {
+//                    return Color.rgb(0, 153, 0);
+//                }
+//            });
 
+            // init series data
+            GraphViewSeries series = new GraphViewSeries(GraphData.toArray(new GraphViewData[GraphData.size()]) );
             GraphView graphView = new LineGraphView(
                     Exchange.this // context
                     , "" // heading

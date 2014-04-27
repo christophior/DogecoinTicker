@@ -148,15 +148,15 @@ public class ExchangeList extends ListActivity {
             int coefficient = 1000;
 
             if (exchange.equals("cryptsy")){
-                exchangePrices.put("Cryptsy", coefficient*price);
+                exchangePrices.put("Cryptsy", formatPricemBTC(price));
             } else if (exchange.equals("coinedup")){
-                exchangePrices.put("CoinedUp", coefficient*price);
+                exchangePrices.put("CoinedUp", formatPricemBTC(price));
             } else if (exchange.equals("coins-e")){
-                exchangePrices.put("Coins-E", coefficient*price);
+                exchangePrices.put("Coins-E", formatPricemBTC(price));
             } else if (exchange.equals("bter")){
-                exchangePrices.put("Bter", coefficient*price);
+                exchangePrices.put("Bter", formatPricemBTC(price));
             } else if (exchange.equals("vircurex")){
-                exchangePrices.put("Vircurex", coefficient*price);
+                exchangePrices.put("Vircurex", formatPricemBTC(price));
             }
         }
 
@@ -207,9 +207,9 @@ public class ExchangeList extends ListActivity {
             setListAdapter(new ExchangeArrayAdapter(ExchangeList.this, EXCHANGES, prices));
         }
 
-        public double formatPricemBTC(String price){
+        public double formatPricemBTC(Double price){
             DecimalFormat df = new DecimalFormat("0.00000");
-            double result = Double.parseDouble(price) * 1000;
+            double result = price * 1000;
             String formattedPrice = df.format(result);
             return Double.parseDouble(formattedPrice);
         }
