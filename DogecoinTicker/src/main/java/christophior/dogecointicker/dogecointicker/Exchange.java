@@ -29,9 +29,9 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 
-public class cryptsy extends Activity {
+public class Exchange extends Activity {
 
-    private static String urlExchange = "http://doge.yottabyte.nu/json/cryptsy/24h.json";
+    private static String urlExchange = "";
     protected static ArrayList<points> pointList = new ArrayList<points>();
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphViewData>();
     private ProgressDialog pDialog;
@@ -40,6 +40,16 @@ public class cryptsy extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        // get API url
+        String market = b.getString("market");
+        urlExchange = ("http://doge.yottabyte.nu/json/" + market.toLowerCase() + "/24h.json");
+        setTitle(market);
+        // reset stats
+        highPrice = -1.0;
+        lowPrice = 9999.0;
+        percentChange = 0.0;
+
         (new GetJson()).execute();
         setContentView(R.layout.activity_exchange);
     }
@@ -72,7 +82,7 @@ public class cryptsy extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
 //            // Showing progress dialog
-            pDialog = new ProgressDialog(cryptsy.this);
+            pDialog = new ProgressDialog(Exchange.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -139,36 +149,51 @@ public class cryptsy extends Activity {
             GraphViewSeries series = new GraphViewSeries(GraphData.toArray(new GraphViewData[GraphData.size()]));
 
             GraphView graphView = new LineGraphView(
-                    cryptsy.this // context
+                    Exchange.this // context
                     , "" // heading
             );
 
             graphView.addSeries(series); // data
             // set styles
-        graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
-//        graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
-//        graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-        graphView.getGraphViewStyle().setTextSize(1);
-        graphView.getGraphViewStyle().setNumHorizontalLabels(1);
-        graphView.getGraphViewStyle().setNumVerticalLabels(15);
-        graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
-            // set view port, start=2, size=40
-//        graphView.setViewPort(2, 40);
-//        graphView.setScrollable(true);
+            if (getResources().getConfiguration().orientation == 1) {
+                graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
+//              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
+//              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
+//                graphView.getGraphViewStyle().setTextSize(100);
+                graphView.getGraphViewStyle().setNumHorizontalLabels(1);
+                graphView.getGraphViewStyle().setNumVerticalLabels(15);
+                graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
+//              graphView.setViewPort(2, 40);
+//              graphView.setScrollable(true);
+                // optional - activate scaling / zooming
+//                graphView.setScalable(false);
+            } else {
+                graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
+//              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
+//              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
+//                graphView.getGraphViewStyle().setTextSize(0);
+                graphView.getGraphViewStyle().setNumHorizontalLabels(12);
+                graphView.getGraphViewStyle().setNumVerticalLabels(15);
+//                graphView.getGraphViewStyle().setVerticalLabelsWidth(0);
+//              graphView.setViewPort(2, 40);
+//              graphView.setScrollable(true);
             // optional - activate scaling / zooming
-        graphView.setScalable(true);
+//                graphView.setScalable(false);
+            }
 
             LinearLayout layout = (LinearLayout) findViewById(R.id.graph);
             layout.addView(graphView);
 
-//            TextView tv_high = (TextView) findViewById(R.id.high_text);
-//            tv_high.setText(String.valueOf(highPrice));
-//
-//            TextView tv_low = (TextView) findViewById(R.id.low_text);
-//            tv_low.setText(String.valueOf(lowPrice));
-//
-//            TextView tv_change = (TextView) findViewById(R.id.change_text);
-//            tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
+            if (getResources().getConfiguration().orientation == 1) {
+                TextView tv_high = (TextView) findViewById(R.id.high_text);
+                tv_high.setText(String.valueOf(highPrice));
+
+                TextView tv_low = (TextView) findViewById(R.id.low_text);
+                tv_low.setText(String.valueOf(lowPrice));
+
+                TextView tv_change = (TextView) findViewById(R.id.change_text);
+                tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
+            }
         }
 
         public double formatPricemBTC(Double price){

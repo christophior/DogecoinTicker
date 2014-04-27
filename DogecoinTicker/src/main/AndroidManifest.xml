@@ -24,24 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="christophior.dogecointicker.dogecointicker.cryptsy"
-            android:label="@string/title_activity_cryptsy" >
-        </activity>
-        <activity
-            android:name="christophior.dogecointicker.dogecointicker.coinedup"
-            android:label="@string/title_activity_coinedup" >
-        </activity>
-        <activity
-            android:name="christophior.dogecointicker.dogecointicker.coinse"
-            android:label="@string/title_activity_coinse" >
-        </activity>
-        <activity
-            android:name="christophior.dogecointicker.dogecointicker.bter"
-            android:label="@string/title_activity_bter" >
-        </activity>
-        <activity
-            android:name="christophior.dogecointicker.dogecointicker.vircurex"
-            android:label="@string/title_activity_vircurex" >
+            android:name="christophior.dogecointicker.dogecointicker.Exchange"
+            android:label="@string/title_activity_default" >
         </activity>
     </application>
 

@@ -77,7 +77,7 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
                                 + " " + currentCurrency)
                         .setOngoing(true);
         // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(this, cryptsy.class);
+        Intent resultIntent = new Intent(this, Exchange.class);
 
 //        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 //        inboxStyle.setBigContentTitle("Event tracker details:");
@@ -93,7 +93,7 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         // your application to the Home screen.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(cryptsy.class);
+        stackBuilder.addParentStack(Exchange.class);
         // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent =
@@ -107,6 +107,4 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         mId++;
         mNotificationManager.notify(notIDs.get(key), mBuilder.build());
     }
-
-
 }

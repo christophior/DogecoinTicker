@@ -93,7 +93,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="5"
-        android:background="#CC5500"/>
+        android:background="#FFFFFF"/>
 
     <LinearLayout
         android:id="@+id/stats"

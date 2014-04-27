@@ -59,30 +59,46 @@ public class ExchangeList extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         //get selected items
         String selectedValue = (String) getListAdapter().getItem(position);
+        Bundle b;
 
         switch(position){
             case 0:
-                Intent newCryptsyActivity = new Intent(this, cryptsy.class);
+                Intent newCryptsyActivity = new Intent(this, Exchange.class);
+                b = new Bundle();
+                b.putString("market", "Cryptsy");
+                newCryptsyActivity.putExtras(b);
                 startActivity(newCryptsyActivity);
 //                Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
                 break;
             case 1:
-//                Intent newActivity = new Intent(this, coinedup.class);
-//                startActivity(newActivity);
-                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
+                Intent newCoinedUpActivity = new Intent(this, Exchange.class);
+                b = new Bundle();
+                b.putString("market", "CoinedUp");
+                newCoinedUpActivity.putExtras(b);
+                startActivity(newCoinedUpActivity);
+//                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 2:
-                Intent newCoinseActivity = new Intent(this, coinse.class);
+                Intent newCoinseActivity = new Intent(this, Exchange.class);
+                b = new Bundle();
+                b.putString("market", "Coins-E");
+                newCoinseActivity.putExtras(b);
                 startActivity(newCoinseActivity);
 //                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
-                Intent newBterActivity = new Intent(this, bter.class);
+                Intent newBterActivity = new Intent(this, Exchange.class);
+                b = new Bundle();
+                b.putString("market", "Bter");
+                newBterActivity.putExtras(b);
                 startActivity(newBterActivity);
 //                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
             case 4:
-                Intent newVircurexActivity = new Intent(this, vircurex.class);
+                Intent newVircurexActivity = new Intent(this, Exchange.class);
+                b = new Bundle();
+                b.putString("market", "Vircurex");
+                newVircurexActivity.putExtras(b);
                 startActivity(newVircurexActivity);
 //                Toast.makeText(this, "RESTRICTED! NO API ACCESS YET!", Toast.LENGTH_SHORT).show();
                 break;
