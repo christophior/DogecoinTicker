@@ -130,7 +130,7 @@ public class MainActivity extends Activity {
 
 		if (savedInstanceState == null) {
 			// on first time display view for first nav item
-			displayView(0);
+			displayView(5);
 		}
 	}
 
@@ -196,6 +196,9 @@ public class MainActivity extends Activity {
 		// update the main content by replacing fragments
 		Fragment fragment = null;
 		switch (position) {
+        case 5: // home screen
+            fragment = new HomeFragment();
+            break;
 		case 0:
             currentFragment = position;
 			fragment = new ExchangeFragment();
