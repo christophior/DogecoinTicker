@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
@@ -20,17 +21,17 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     private int mId = 0;
     private int bigCheck = 0;
 
-    private HashMap<String, Integer> notIDs = new HashMap<String, Integer>();
+    private HashMap<String, Integer> currentIDs = new HashMap<String, Integer>();
     private String currentCurrency = "mBTC";
-    NotificationCompat.Builder mBuilder =
-            new NotificationCompat.Builder(this);
-    NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+    NotificationManager mNotificationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getPreferenceManager().setSharedPreferencesName("ttt_prefs");
         addPreferencesFromResource(R.xml.preferences);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     }
 
     @Override
@@ -69,35 +70,54 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     }
 
     public void createNotification(String key) {
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if (notIDs.containsKey(key)) {
-            mNotificationManager.cancel(notIDs.get(key));
-            notIDs.remove(key);
+        if (currentIDs.size() == 1 && currentIDs.containsKey(key)) {
+            mNotificationManager.cancelAll();
+            currentIDs.remove(key);
             return;
         }
+        System.out.println("1");
 
+        if (currentIDs.containsKey(key))
+            currentIDs.remove(key);
+        else
+            currentIDs.put(key, mId);
 
-//                        .setSmallIcon(R.drawable.ic_launcher)
-//                        .setContentText(key + " \t\t1 Doge = " + ExchangeList.exchangePrices.get(key)
-//                                + " " + currentCurrency)
-//                        .setOngoing(true);
+        System.out.println("2");
+
+        mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.cancelAll();
+
+        System.out.println("3");
+
         // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(this, Exchange.class);
+        Intent resultIntent = new Intent(this, ExchangeList.class);
 
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this);
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
-        inboxStyle.setBigContentTitle("Dogecoin Prices:");
-        //if (mId >= 1) {
-            inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get(key)
-                    + " " + currentCurrency + " @ " + key);
-            if (bigCheck == 0) {
-                mBuilder.setStyle(inboxStyle);
-                mBuilder.setSmallIcon(R.drawable.ic_launcher);
-                mBuilder.setOngoing(true);
-            }
-        //}
+        mBuilder.setStyle(inboxStyle);
+        mBuilder.setSmallIcon(R.drawable.ic_launcher);
+        mBuilder.setOngoing(true);
+        mBuilder.setContentTitle("Dogecoin Prices:");
 
+        if (currentIDs.containsKey("Cryptsy"))
+            inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("Cryptsy")
+                    + " " + currentCurrency + " @ Cryptsy");
+        if (currentIDs.containsKey("CoinedUp"))
+            inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("CoinedUp")
+                    + " " + currentCurrency + " @ CoinedUp");
+        if (currentIDs.containsKey("Coins-E"))
+            inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("Coins-E")
+                    + " " + currentCurrency + " @ Coins-E");
+        if (currentIDs.containsKey("Bter"))
+            inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("Bter")
+                    + " " + currentCurrency + " @ Bter");
+        if (currentIDs.containsKey("Vircurex"))
+            inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("Vircurex")
+                    + " " + currentCurrency + " @ Vircurex");
 
         // The stack builder object will contain an artificial back stack for the
         // started Activity.
@@ -115,9 +135,8 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
                 );
         mBuilder.setContentIntent(resultPendingIntent);
         // mId allows you to update the notification later on.
-        notIDs.put(key, mId);
+
         mId++;
-        bigCheck++;
-        mNotificationManager.notify(notIDs.get(key), mBuilder.build());
+        mNotificationManager.notify(mId, mBuilder.build());
     }
 }
