@@ -2,3 +2,12 @@
 /local.properties
 /.idea/workspace.xml
 .DS_Store
+*.class
+*.apk
+bin/
+gen/
+local.properties
+Thumbs.db
+.idea
+.gradle
+build/
