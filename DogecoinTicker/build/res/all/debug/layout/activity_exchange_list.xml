@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:padding="5dp" >
+
+<TextView
+    android:id="@+id/label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@+id/label"
+    android:textSize="30px"
+    android:paddingTop="10px"
+    android:paddingBottom="10px"
+    android:paddingLeft="10px"
+    android:layout_alignParentLeft="true">
+</TextView>
+
+<TextView
+    android:id="@+id/label_price"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@+id/label"
+    android:textSize="30px"
+    android:paddingTop="10px"
+    android:paddingBottom="10px"
+    android:paddingRight="10px"
+    android:layout_alignParentRight="true">
+</TextView>
+
+</RelativeLayout><!-- From: file:/Users/Chris/AndroidStudioProjects/DogecoinTicker/DogecoinTicker/src/main/res/layout/activity_exchange_list.xml -->

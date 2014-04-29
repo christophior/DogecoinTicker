@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/Users/Chris/AndroidStudioProjects/DogecoinTicker/DogecoinTicker/src/main/res/values/arrays.xml -->
+    <eat-comment />
+
+    <string-array name="list_currencies">
+        <item>@string/satoshi_currency</item>
+        <item>@string/BTC_currency</item>
+        <item>@string/mBTC_currency</item>
+    </string-array>
+    <!-- From: file:/Users/Chris/AndroidStudioProjects/DogecoinTicker/DogecoinTicker/src/main/res/values/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="activity_horizontal_margin">0dp</dimen>
+    <dimen name="activity_vertical_margin">0dp</dimen>
+    <dimen name="stat_labels">15dp</dimen>
+    <dimen name="stat_numbers">20dp</dimen>
+    <dimen name="time_buttons">25dp</dimen>
+    <!-- From: file:/Users/Chris/AndroidStudioProjects/DogecoinTicker/DogecoinTicker/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="BTC_currency">BTC</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">DogecoinTicker</string>
+    <string name="currency_to_use">Currency To Use With App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="mBTC_currency">mBTC</string>
+    <string name="notification_tray">Show in Notification Tray</string>
+    <string name="satoshi_currency">Satoshi</string>
+    <string name="title_activity_cryptsy">Cryptsy</string>
+    <!-- From: file:/Users/Chris/AndroidStudioProjects/DogecoinTicker/DogecoinTicker/src/main/res/values/styles.xml -->
+    <eat-comment />
+
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+</resources>

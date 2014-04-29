@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Settings">
+
+    <PreferenceCategory android:title="@string/notification_tray" >
+        <CheckBoxPreference
+            android:key="Cryptsy"
+            android:title="Cryptsy"
+            android:defaultValue="false"
+            android:summary="" />
+
+        <CheckBoxPreference
+            android:key="CoinedUp"
+            android:title="CoinedUp"
+            android:defaultValue="false"
+            android:summary="" />
+
+        <CheckBoxPreference
+            android:key="Coins-E"
+            android:title="Coins-E"
+            android:defaultValue="false"
+            android:summary="" />
+
+        <CheckBoxPreference
+            android:key="Bter"
+            android:title="Bter"
+            android:defaultValue="false"
+            android:summary="" />
+
+        <CheckBoxPreference
+            android:key="Vircurex"
+            android:title="Vircurex"
+            android:defaultValue="false"
+            android:summary="" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="" >
+        <ListPreference
+            android:key="currency_to_use"
+            android:title="Currency To Use With App"
+            android:summary="Choose which currency you would like as your exchange rate"
+            android:defaultValue="@string/satoshi_currency"
+            android:entries="@array/list_currencies"
+            android:entryValues="@array/list_currencies" />
+    </PreferenceCategory>
+
+
+</PreferenceScreen><!-- From: file:/Users/Chris/AndroidStudioProjects/DogecoinTicker/DogecoinTicker/src/main/res/xml/preferences.xml -->
