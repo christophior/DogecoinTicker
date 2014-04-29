@@ -86,6 +86,7 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
             mBuilder.setSmallIcon(R.drawable.ic_launcher);
             mBuilder.setOngoing(true);
             mBuilder.setContentTitle("Dogecoin Prices:");
+            mBuilder.addAction(R.drawable.ic_notification, "Click to update", null);
         }
 
         if (sharedPreferences.getBoolean(("Cryptsy"), false))
