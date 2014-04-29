@@ -45,4 +45,14 @@
     <string name="currency_to_use">Currency To Use With App</string>
     <string name="refresh">Refresh</string>
 
+    <string name="interval">Interval</string>
+    <string name="interval1h">1h</string>
+    <string name="interval3h">3h</string>
+    <string name="interval12h">12h</string>
+    <string name="interval24h">24h</string>
+    <string name="interval3d">3d</string>
+    <string name="interval7d">7d</string>
+    <string name="interval14d">14d</string>
+    <string name="interval30d">30d</string>
+
 </resources>

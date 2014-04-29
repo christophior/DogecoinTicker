@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTabHost;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,9 @@ public class ExchangeFragment extends Fragment {
     boolean EveryOtherLine = true;
     int startingHour, xAxisCount = 0;
     private String[] markets = {"cryptsy", "coinedup", "coins-e", "bter", "vircurex"};
+    private String[] intervals = {"1h", "3h", "12h", "24h", "3d", "7d", "14d", "30d"};
 
+    private FragmentTabHost mTabHost;
 
     public ExchangeFragment() {
     }
@@ -61,7 +64,7 @@ public class ExchangeFragment extends Fragment {
 //        Bundle b = getIntent().getExtras();
         // get API url
 //        String market = b.getString("market");
-        urlExchange = ("http://doge.yottabyte.nu/json/" + markets[MainActivity.currentFragment] + "/24h.json");
+        urlExchange = ("http://doge.yottabyte.nu/json/" + markets[MainActivity.currentFragment] + "/" + intervals[MainActivity.currentInterval]+ ".json");
         // reset stats
         highPrice = -1.0;
         lowPrice = 9999.0;

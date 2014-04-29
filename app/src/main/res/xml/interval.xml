@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Intervals">
+        <ListPreference
+            android:key="interval_to_use"
+            android:title="Interval To Use With App"
+            android:defaultValue="@string/interval24h"
+            android:entries="@array/list_intervals"
+            android:entryValues="@array/list_intervals" />
+</PreferenceScreen>

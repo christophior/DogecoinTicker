@@ -8,4 +8,15 @@
         <item>@string/mBTC_currency</item>
     </string-array>
 
+    <string-array name="list_intervals">
+        <item>@string/interval1h</item>
+        <item>@string/interval3h</item>
+        <item>@string/interval12h</item>
+        <item>@string/interval24h</item>
+        <item>@string/interval3d</item>
+        <item>@string/interval7d</item>
+        <item>@string/interval14d</item>
+        <item>@string/interval30d</item>
+    </string-array>
+
 </resources>

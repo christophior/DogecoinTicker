@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -58,6 +60,9 @@ public class MainActivity extends Activity {
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
     static protected int currentFragment = 0;
+    static protected int currentInterval = 3;
+
+    AlertDialog levelDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -173,10 +178,30 @@ public class MainActivity extends Activity {
         case R.id.action_refresh:
             displayView(currentFragment);
             return true;
+        case R.id.action_interval:
+            intervalDialog();
+            return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+    public void intervalDialog() {
+        final CharSequence[] items = {"1 hour", "3 hours", "12 hours", "24 hours", "3 days"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Interval");
+        builder.setSingleChoiceItems(items, currentInterval, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                currentInterval = item;
+                levelDialog.dismiss();
+                displayView(currentFragment);
+            }
+        });
+
+        levelDialog = builder.create();
+        levelDialog.show();
+    }
 
 	/* *
 	 * Called when invalidateOptionsMenu() is triggered
@@ -185,7 +210,9 @@ public class MainActivity extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// if nav drawer is opened, hide the action items
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_refresh).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_interval).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
