@@ -13,17 +13,13 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.widget.Toast;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+
 
 public class Settings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private int mId = 0;
-
-    private HashMap<String, Integer> currentIDs = new HashMap<String, Integer>();
     private String currentCurrency = "mBTC";
     NotificationManager mNotificationManager;
 
@@ -54,7 +50,6 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Preference pref = findPreference(key);
         ListPreference listPrefer = (ListPreference) findPreference("currency_to_use");
-        CharSequence currTxt = listPrefer.getEntry();
         currentCurrency = listPrefer.getValue();
 
         if (pref instanceof CheckBoxPreference)
@@ -68,20 +63,11 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     }
 
     public void createNotification(String key, SharedPreferences sharedPreferences) {
-//        if (key.equals("Cryptsy") && !temp)
-//            mNotificationManager.cancelAll();
-
-//        if (currentIDs.containsKey(key))
-//            currentIDs.remove(key);
-//        else
-//            currentIDs.put(key, mId);
 
         mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotificationManager.cancelAll();
-
-        boolean temp = sharedPreferences.getBoolean(key, false);
 
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, ExchangeList.class);
