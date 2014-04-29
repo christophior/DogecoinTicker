@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -15,11 +16,12 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Settings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private int mId = 0;
-    private int bigCheck = 0;
 
     private HashMap<String, Integer> currentIDs = new HashMap<String, Integer>();
     private String currentCurrency = "mBTC";
@@ -54,13 +56,9 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         ListPreference listPrefer = (ListPreference) findPreference("currency_to_use");
         CharSequence currTxt = listPrefer.getEntry();
         currentCurrency = listPrefer.getValue();
-//        if (bigCheck > 0) {
-//            inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get(key)
-//                    + " " + currentCurrency + " @ " + key);
-//            Toast.makeText(this, key, Toast.LENGTH_SHORT).show();
-//        }
-        if (!key.equals("currency_to_use"))
-            createNotification(key);
+
+        if (pref instanceof CheckBoxPreference)
+            createNotification(key, sharedPreferences);
 
         if (pref instanceof ListPreference) {
             ListPreference listPref = (ListPreference) pref;
@@ -69,27 +67,21 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         }
     }
 
-    public void createNotification(String key) {
-        if (currentIDs.size() == 1 && currentIDs.containsKey(key)) {
-            mNotificationManager.cancelAll();
-            currentIDs.remove(key);
-            return;
-        }
-        System.out.println("1");
+    public void createNotification(String key, SharedPreferences sharedPreferences) {
+//        if (key.equals("Cryptsy") && !temp)
+//            mNotificationManager.cancelAll();
 
-        if (currentIDs.containsKey(key))
-            currentIDs.remove(key);
-        else
-            currentIDs.put(key, mId);
-
-        System.out.println("2");
+//        if (currentIDs.containsKey(key))
+//            currentIDs.remove(key);
+//        else
+//            currentIDs.put(key, mId);
 
         mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotificationManager.cancelAll();
 
-        System.out.println("3");
+        boolean temp = sharedPreferences.getBoolean(key, false);
 
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, ExchangeList.class);
@@ -98,24 +90,30 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
                 new NotificationCompat.Builder(this);
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
-        mBuilder.setStyle(inboxStyle);
-        mBuilder.setSmallIcon(R.drawable.ic_launcher);
-        mBuilder.setOngoing(true);
-        mBuilder.setContentTitle("Dogecoin Prices:");
+        if (sharedPreferences.getBoolean(("Cryptsy"), true) ||
+                sharedPreferences.getBoolean(("CoinedUp"), true) ||
+                sharedPreferences.getBoolean(("Coins-E"), true) ||
+                sharedPreferences.getBoolean(("Bter"), true) ||
+                sharedPreferences.getBoolean(("Vircurex"), true)) {
+            mBuilder.setStyle(inboxStyle);
+            mBuilder.setSmallIcon(R.drawable.ic_launcher);
+            mBuilder.setOngoing(true);
+            mBuilder.setContentTitle("Dogecoin Prices:");
+        }
 
-        if (currentIDs.containsKey("Cryptsy"))
+        if (sharedPreferences.getBoolean(("Cryptsy"), false))
             inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("Cryptsy")
                     + " " + currentCurrency + " @ Cryptsy");
-        if (currentIDs.containsKey("CoinedUp"))
+        if (sharedPreferences.getBoolean(("CoinedUp"), false))
             inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("CoinedUp")
                     + " " + currentCurrency + " @ CoinedUp");
-        if (currentIDs.containsKey("Coins-E"))
+        if (sharedPreferences.getBoolean(("Coins-E"), false))
             inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("Coins-E")
                     + " " + currentCurrency + " @ Coins-E");
-        if (currentIDs.containsKey("Bter"))
+        if (sharedPreferences.getBoolean(("Bter"), false))
             inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("Bter")
                     + " " + currentCurrency + " @ Bter");
-        if (currentIDs.containsKey("Vircurex"))
+        if (sharedPreferences.getBoolean(("Vircurex"), false))
             inboxStyle.addLine("1 Doge = " + ExchangeList.exchangePrices.get("Vircurex")
                     + " " + currentCurrency + " @ Vircurex");
 
