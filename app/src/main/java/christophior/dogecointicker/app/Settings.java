@@ -1,21 +1,28 @@
 package christophior.dogecointicker.app;
 
+import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.lang.Override;
 import java.lang.String;
+
+import static christophior.dogecointicker.app.NotificationReceiver.UPDATE_NOTI;
 
 
 public class Settings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -77,6 +84,10 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
                 new NotificationCompat.Builder(this);
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
+        Intent updateIntent = new Intent();
+        updateIntent.setAction(UPDATE_NOTI);
+        PendingIntent pendingUpdate = PendingIntent.getBroadcast(this, 0, updateIntent, 0);
+
         if (sharedPreferences.getBoolean(("Cryptsy"), true) ||
                 sharedPreferences.getBoolean(("CoinedUp"), true) ||
                 sharedPreferences.getBoolean(("Coins-E"), true) ||
@@ -86,8 +97,19 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
             mBuilder.setSmallIcon(R.drawable.ic_launcher);
             mBuilder.setOngoing(true);
             mBuilder.setContentTitle("Dogecoin Prices:");
-            mBuilder.addAction(R.drawable.ic_notification, "Click to update", null);
+            mBuilder.addAction(R.drawable.ic_notification, "Click to update", pendingUpdate);
+
+
+//            AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+//            Intent i = new Intent(this, NotificationService.class);
+//            PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+//            am.cancel(pi);
+//                am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                        SystemClock.elapsedRealtime() + 5000,
+//                        5000, pi);
+//            System.out.println("Alarm has started");
         }
+        sendBroadcast(updateIntent);
 
         if (sharedPreferences.getBoolean(("Cryptsy"), false))
             inboxStyle.addLine("1 Doge = " + MainActivity.exchangePrices.get("Cryptsy")
@@ -125,4 +147,5 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         mId++;
         mNotificationManager.notify(mId, mBuilder.build());
     }
+
 }
