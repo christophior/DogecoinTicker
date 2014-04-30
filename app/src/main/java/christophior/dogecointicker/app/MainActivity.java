@@ -86,17 +86,18 @@ public class MainActivity extends Activity {
 
 		navDrawerItems = new ArrayList<NavDrawerItem>();
 
+
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], 0, true, "2822 mBTC"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], 0, true, Double.toString(exchangePrices.get("Cryptsy")) + " mBTC"));
 		// Find People
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], 0, true, "1253 mBTC"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], 0, true, Double.toString(exchangePrices.get("CoinedUp")) + " mBTC"));
 		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], 0, true, "2345 mBTC"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], 0, true, Double.toString(exchangePrices.get("Coins-E")) + " mBTC"));
 		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], 0, true, "2348 mBTC"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], 0, true, Double.toString(exchangePrices.get("Bter")) + " mBTC"));
 		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], 0, true, "6374 mBTC"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], 0, true, Double.toString(exchangePrices.get("Vircurex")) + " mBTC"));
 
 		
 

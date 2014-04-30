@@ -11,6 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="5"
-        android:background="#ff98b865"/>
+        android:background="@color/graph_background_color"
+        android:padding="5dp"/>
 
 </LinearLayout>

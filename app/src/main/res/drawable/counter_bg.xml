@@ -3,7 +3,7 @@
     android:shape="rectangle" >
 
     <!-- view background color -->
-    <solid android:color="#ff308509" >
+    <solid android:color="@color/counter_text_bg" >
     </solid>
 
     <!-- If you want to add some padding -->

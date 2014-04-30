@@ -212,12 +212,12 @@ public class ExchangeFragment extends Fragment {
                 graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
 //              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-                graphView.getGraphViewStyle().setTextSize(16);
+                graphView.getGraphViewStyle().setTextSize(22);
                 graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.DKGRAY);
                 graphView.getGraphViewStyle().setVerticalLabelsColor(Color.DKGRAY);
                 graphView.getGraphViewStyle().setNumHorizontalLabels(13);
                 graphView.getGraphViewStyle().setNumVerticalLabels(15);
-//                graphView.getGraphViewStyle().setVerticalLabelsWidth(0);
+                graphView.getGraphViewStyle().setVerticalLabelsWidth(100);
 //              graphView.setViewPort(2, 40);
 //              graphView.setScrollable(true);
                 // optional - activate scaling / zooming
