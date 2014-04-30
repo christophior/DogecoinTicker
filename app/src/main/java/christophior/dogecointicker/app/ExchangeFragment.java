@@ -185,7 +185,7 @@ public class ExchangeFragment extends Fragment {
                     } else {
                         if (EveryOtherLine){
                             EveryOtherLine = false;
-                            return Double.toString(value) + "  ";
+                            return null;
                         } else {
                             EveryOtherLine = true;
                             return "";
@@ -212,9 +212,9 @@ public class ExchangeFragment extends Fragment {
                 graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
 //              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-//                graphView.getGraphViewStyle().setTextSize(0);
-                graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
-                graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
+                graphView.getGraphViewStyle().setTextSize(16);
+                graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.DKGRAY);
+                graphView.getGraphViewStyle().setVerticalLabelsColor(Color.DKGRAY);
                 graphView.getGraphViewStyle().setNumHorizontalLabels(13);
                 graphView.getGraphViewStyle().setNumVerticalLabels(15);
 //                graphView.getGraphViewStyle().setVerticalLabelsWidth(0);
