@@ -36,12 +36,18 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 
 public class MainActivity extends Activity {
-
     private ProgressDialog pDialog;
     private static String urlMarketPrices = "http://doge.yottabyte.nu/json/markets.json";
     public static HashMap<String, Double> exchangePrices = new HashMap<String, Double>();
     public final String[] EXCHANGES = new String[] { "Cryptsy", "CoinedUp",
             "Coins-E", "Bter", "Vircurex"};
+
+    // Keep track of which fragment and time interval we're on
+    static protected int currentFragment = 0;
+    static protected int currentInterval = 3;
+    static protected double[] prices;
+
+    AlertDialog levelDialog;
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -59,10 +65,6 @@ public class MainActivity extends Activity {
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
-    static protected int currentFragment = 0;
-    static protected int currentInterval = 3;
-
-    AlertDialog levelDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -223,7 +225,9 @@ public class MainActivity extends Activity {
 	private void displayView(int position) {
 		// update the main content by replacing fragments
 		Fragment fragment = null;
-		switch (position) {
+        (new GetJson()).execute();
+
+        switch (position) {
         case 5: // home screen
             fragment = new HomeFragment();
             break;
@@ -355,7 +359,7 @@ public class MainActivity extends Activity {
 
         @Override
         protected void onPostExecute(Void result) {
-            double[] prices = {exchangePrices.get("Cryptsy"), exchangePrices.get("CoinedUp"),
+            prices = new double[] {exchangePrices.get("Cryptsy"), exchangePrices.get("CoinedUp"),
                     exchangePrices.get("Coins-E"), exchangePrices.get("Bter"), exchangePrices.get("Vircurex")};
         }
 

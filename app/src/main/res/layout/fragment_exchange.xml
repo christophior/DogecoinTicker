@@ -25,8 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:paddingLeft="@dimen/exchange_title_padding_left"
-            android:paddingTop="@dimen/exchange_title_padding_top"
-            android:textSize="30sp"/>
+            android:textSize="27sp"/>
         <TextView
             android:layout_width="fill_parent"
             android:layout_centerVertical="true"
@@ -104,20 +103,28 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
-                    android:text=""
+                    android:id="@+id/current_text"
+                    android:text="@string/na"
+                    android:textColor="@color/stat_label_color"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
-                    android:gravity="center_horizontal"/>
+                    android:paddingTop="@dimen/stats_top_padding"
+                    android:paddingRight="@dimen/stats_right_padding"
+                    android:textSize="30sp"
+                    android:gravity="right"/>
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_centerVertical="true"
                     android:layout_height="0dp" />
                 <TextView
-                    android:text=""
+                    android:text="@string/current_label"
+                    android:textColor="@color/label_color"
                     android:layout_height="wrap_content"
+                    android:paddingRight="@dimen/stats_right_padding"
                     android:layout_width="fill_parent"
                     android:textSize="15sp"
-                    android:gravity="center_horizontal"/>
+                    android:gravity="right"/>
             </LinearLayout>
         </LinearLayout>
 

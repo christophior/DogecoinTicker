@@ -51,6 +51,7 @@
     <string name="change_label">percent change</string>
     <string name="high_label">highest price</string>
     <string name="low_label">lowest price</string>
+    <string name="current_label">current price</string>
 
     <string name="converter_title"></string>
 

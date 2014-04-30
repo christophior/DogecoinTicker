@@ -234,14 +234,17 @@ public class ExchangeFragment extends Fragment {
                 TextView tv_low = (TextView)getView().findViewById(R.id.low_text);
                 tv_low.setText(String.valueOf(lowPrice));
 
+//                TextView tv_current = (TextView)getView().findViewById(R.id.current_text);
+//                tv_current.setText(String.valueOf(MainActivity.prices[markets[MainActivity.currentFragment]]));
+
+                TextView tv_change = (TextView)getView().findViewById(R.id.change_text);
+                tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
+
                 TextView tv_title = (TextView)getView().findViewById(R.id.exchange_title);
                 tv_title.setText(markets[MainActivity.currentFragment]);
 
                 TextView tv_interval = (TextView)getView().findViewById(R.id.exchange_interval);
                 tv_interval.setText(interval_labels[MainActivity.currentInterval]);
-
-                TextView tv_change = (TextView)getView().findViewById(R.id.change_text);
-                tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
             }
         }
 
