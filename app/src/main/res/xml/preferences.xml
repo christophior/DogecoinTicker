@@ -39,7 +39,7 @@
         <ListPreference
             android:key="currency_to_use"
             android:title="Currency To Use With App"
-            android:summary="Choose which currency you would like as your exchange rate. Currently only mBTC works in Alpha stage."
+            android:summary="Choose which currency you would like as your exchange rate. Currently only mBTC works in Beta stage."
             android:defaultValue="@string/mBTC_currency"
             android:entries="@array/list_currencies"
             android:entryValues="@array/list_currencies" />
