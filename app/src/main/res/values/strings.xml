@@ -47,6 +47,14 @@
     <string name="exchange_title"></string>
     <string name="exchange_interval"></string>
 
+    <string name="na">N/A</string>
+    <string name="change_label">percent change</string>
+    <string name="high_label">highest price</string>
+    <string name="low_label">lowest price</string>
+
+    <string name="converter_title"></string>
+
+
     <string name="interval">Interval</string>
     <string name="interval1h">1h</string>
     <string name="interval3h">3h</string>
