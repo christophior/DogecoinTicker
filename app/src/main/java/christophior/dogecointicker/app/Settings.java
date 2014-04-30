@@ -17,12 +17,14 @@ import android.support.v4.app.NotificationCompat;
 import java.lang.Override;
 import java.lang.String;
 
+import static christophior.dogecointicker.app.NotificationReceiver.UPDATE_NOTI;
+
 
 public class Settings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private int mId = 0;
     private String currentCurrency = "mBTC";
     NotificationManager mNotificationManager;
+    public static SharedPreferences share;
 
 
     @Override
@@ -61,6 +63,8 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
             pref.setSummary(listPref.getEntry());
             return;
         }
+
+        share = sharedPreferences;
     }
 
     public void createNotification(String key, SharedPreferences sharedPreferences) {
@@ -77,6 +81,10 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
                 new NotificationCompat.Builder(this);
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
+        Intent updateIntent = new Intent();
+        updateIntent.setAction(UPDATE_NOTI);
+        PendingIntent pendingUpdate = PendingIntent.getBroadcast(this, 0, updateIntent, 0);
+
         if (sharedPreferences.getBoolean(("Cryptsy"), true) ||
                 sharedPreferences.getBoolean(("CoinedUp"), true) ||
                 sharedPreferences.getBoolean(("Coins-E"), true) ||
@@ -86,7 +94,7 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
             mBuilder.setSmallIcon(R.drawable.ic_launcher);
             mBuilder.setOngoing(true);
             mBuilder.setContentTitle("Dogecoin Prices:");
-            mBuilder.addAction(R.drawable.ic_notification, "Click to update", null);
+            mBuilder.addAction(R.drawable.ic_notification, "Click to update", pendingUpdate);
         }
 
         if (sharedPreferences.getBoolean(("Cryptsy"), false))
@@ -120,9 +128,8 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
         mBuilder.setContentIntent(resultPendingIntent);
-        // mId allows you to update the notification later on.
 
-        mId++;
-        mNotificationManager.notify(mId, mBuilder.build());
+        mNotificationManager.notify(1, mBuilder.build());
     }
+
 }

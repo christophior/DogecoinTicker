@@ -16,6 +16,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <receiver
+            android:name="christophior.dogecointicker.app.NotificationReceiver">
+            <intent-filter>
+                <action android:name="christophior.dogecointicker.app.UPDATE_NOTI" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name="christophior.dogecointicker.app.Settings"
             android:label="Settings">
@@ -25,7 +31,6 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
