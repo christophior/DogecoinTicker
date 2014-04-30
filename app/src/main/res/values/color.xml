@@ -8,4 +8,7 @@
     <color name="counter_text_color">#c5c4c4</color>
     <color name="action_bar_color">#ff45b80a</color>
     <color name="home_background">#ff000000</color>
+    <color name="exchange_title_color">#fff</color>
+    <color name="exchange_interval_color">#ffdddddd</color>
+
 </resources>

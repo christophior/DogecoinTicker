@@ -6,5 +6,8 @@
     <dimen name="stat_numbers">20dp</dimen>
     <dimen name="stat_labels">15dp</dimen>
     <dimen name="time_buttons">25dp</dimen>
+    <dimen name="exchange_title_padding_left">15dp</dimen>
+    <dimen name="exchange_title_padding_top">5dp</dimen>
+    <dimen name="exchange_title_padding_bottom">15dp</dimen>
 
 </resources>

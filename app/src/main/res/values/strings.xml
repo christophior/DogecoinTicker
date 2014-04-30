@@ -44,6 +44,8 @@
     <string name="notification_tray">Show in Notification Tray</string>
     <string name="currency_to_use">Currency To Use With App</string>
     <string name="refresh">Refresh</string>
+    <string name="exchange_title"></string>
+    <string name="exchange_interval"></string>
 
     <string name="interval">Interval</string>
     <string name="interval1h">1h</string>

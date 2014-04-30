@@ -16,8 +16,10 @@ import android.widget.TextView;
 import com.jjoe64.graphview.CustomLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphViewDataInterface;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
+import com.jjoe64.graphview.ValueDependentColor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +45,8 @@ public class ExchangeFragment extends Fragment {
     int startingHour, xAxisCount = 0;
     private String[] markets = {"cryptsy", "coinedup", "coins-e", "bter", "vircurex"};
     private String[] intervals = {"1h", "3h", "12h", "24h", "3d", "7d", "14d", "30d"};
+    private String[] interval_labels = {"1 hour", "3 hours", "12 hours", "24 hours",
+            "3 days", "7 days", "14 days", "30 days"};
 
     private FragmentTabHost mTabHost;
 
@@ -158,7 +162,9 @@ public class ExchangeFragment extends Fragment {
 //            });
 
             // init series data
-            GraphViewSeries series = new GraphViewSeries(GraphData.toArray(new GraphViewData[GraphData.size()]) );
+            GraphViewSeries.GraphViewSeriesStyle seriesStyle = new GraphViewSeries.GraphViewSeriesStyle(Color.WHITE, 4);
+
+            GraphViewSeries series = new GraphViewSeries("", seriesStyle, GraphData.toArray(new GraphViewData[GraphData.size()]) );
             GraphView graphView = new LineGraphView(getActivity(), "");
 
             graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
@@ -179,7 +185,7 @@ public class ExchangeFragment extends Fragment {
                     } else {
                         if (EveryOtherLine){
                             EveryOtherLine = false;
-                            return null;
+                            return Double.toString(value) + "  ";
                         } else {
                             EveryOtherLine = true;
                             return "";
@@ -196,7 +202,7 @@ public class ExchangeFragment extends Fragment {
 //              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
 //                graphView.getGraphViewStyle().setTextSize(100);
                 graphView.getGraphViewStyle().setNumHorizontalLabels(1);
-                graphView.getGraphViewStyle().setNumVerticalLabels(15);
+                graphView.getGraphViewStyle().setNumVerticalLabels(1);
                 graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
 //              graphView.setViewPort(2, 40);
 //              graphView.setScrollable(true);
@@ -207,6 +213,8 @@ public class ExchangeFragment extends Fragment {
 //              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
 //                graphView.getGraphViewStyle().setTextSize(0);
+                graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
+                graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
                 graphView.getGraphViewStyle().setNumHorizontalLabels(13);
                 graphView.getGraphViewStyle().setNumVerticalLabels(15);
 //                graphView.getGraphViewStyle().setVerticalLabelsWidth(0);
@@ -225,6 +233,12 @@ public class ExchangeFragment extends Fragment {
 
                 TextView tv_low = (TextView)getView().findViewById(R.id.low_text);
                 tv_low.setText(String.valueOf(lowPrice));
+
+                TextView tv_title = (TextView)getView().findViewById(R.id.exchange_title);
+                tv_title.setText(markets[MainActivity.currentFragment]);
+
+                TextView tv_interval = (TextView)getView().findViewById(R.id.exchange_interval);
+                tv_interval.setText(interval_labels[MainActivity.currentInterval]);
 
                 TextView tv_change = (TextView)getView().findViewById(R.id.change_text);
                 tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
