@@ -30,6 +30,7 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
     private int mId = 0;
     private String currentCurrency = "mBTC";
     NotificationManager mNotificationManager;
+    public static SharedPreferences share;
 
 
     @Override
@@ -68,6 +69,8 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
             pref.setSummary(listPref.getEntry());
             return;
         }
+
+        share = sharedPreferences;
     }
 
     public void createNotification(String key, SharedPreferences sharedPreferences) {
@@ -98,18 +101,7 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
             mBuilder.setOngoing(true);
             mBuilder.setContentTitle("Dogecoin Prices:");
             mBuilder.addAction(R.drawable.ic_notification, "Click to update", pendingUpdate);
-
-
-//            AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-//            Intent i = new Intent(this, NotificationService.class);
-//            PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
-//            am.cancel(pi);
-//                am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-//                        SystemClock.elapsedRealtime() + 5000,
-//                        5000, pi);
-//            System.out.println("Alarm has started");
         }
-        sendBroadcast(updateIntent);
 
         if (sharedPreferences.getBoolean(("Cryptsy"), false))
             inboxStyle.addLine("1 Doge = " + MainActivity.exchangePrices.get("Cryptsy")
@@ -145,7 +137,7 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         // mId allows you to update the notification later on.
 
         mId++;
-        mNotificationManager.notify(mId, mBuilder.build());
+        mNotificationManager.notify(1, mBuilder.build());
     }
 
 }
