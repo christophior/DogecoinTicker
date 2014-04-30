@@ -1,6 +1,5 @@
 package christophior.dogecointicker.app;
 
-import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -9,11 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.SystemClock;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +20,7 @@ import java.util.HashMap;
 
 import static christophior.dogecointicker.app.Settings.share;
 
-public class NotificationReceiver extends BroadcastReceiver{
+public class NotificationReceiver extends BroadcastReceiver {
 
     public static String UPDATE_NOTI = "christophior.dogecointicker.app.UPDATE_NOTI";
     public static HashMap<String, Double> exchangePrices = new HashMap<String, Double>();
@@ -104,7 +100,7 @@ public class NotificationReceiver extends BroadcastReceiver{
 
     /**
      * Async task class to get json by making HTTP call
-     * */
+     */
     private class GetJson extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -112,19 +108,19 @@ public class NotificationReceiver extends BroadcastReceiver{
             super.onPreExecute();
         }
 
-        private void updateExchangePrice(String exchange, double price){
+        private void updateExchangePrice(String exchange, double price) {
 
             int coefficient = 1000;
 
-            if (exchange.equals("cryptsy")){
+            if (exchange.equals("cryptsy")) {
                 exchangePrices.put("Cryptsy", formatPricemBTC(price));
-            } else if (exchange.equals("coinedup")){
+            } else if (exchange.equals("coinedup")) {
                 exchangePrices.put("CoinedUp", formatPricemBTC(price));
-            } else if (exchange.equals("coins-e")){
+            } else if (exchange.equals("coins-e")) {
                 exchangePrices.put("Coins-E", formatPricemBTC(price));
-            } else if (exchange.equals("bter")){
+            } else if (exchange.equals("bter")) {
                 exchangePrices.put("Bter", formatPricemBTC(price));
-            } else if (exchange.equals("vircurex")){
+            } else if (exchange.equals("vircurex")) {
                 exchangePrices.put("Vircurex", formatPricemBTC(price));
             }
         }
@@ -141,7 +137,7 @@ public class NotificationReceiver extends BroadcastReceiver{
                 try {
                     JSONArray jsonArray = new JSONArray(jsonMarketPrice);
 
-                    for (int i=0; i<jsonArray.length(); i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject singleMarket = jsonArray.getJSONObject(i);
                         updateExchangePrice(singleMarket.getString("m"), singleMarket.getDouble("l"));
                     }
@@ -152,7 +148,9 @@ public class NotificationReceiver extends BroadcastReceiver{
                     System.out.println("Bter Price: " + exchangePrices.get("Bter"));
                     System.out.println("Vircurex Price: " + exchangePrices.get("Vircurex"));
 
-                } catch (JSONException e) { e.printStackTrace(); }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             } else {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
@@ -167,7 +165,7 @@ public class NotificationReceiver extends BroadcastReceiver{
                     exchangePrices.get("Coins-E"), exchangePrices.get("Bter"), exchangePrices.get("Vircurex")};
         }
 
-        public double formatPricemBTC(Double price){
+        public double formatPricemBTC(Double price) {
             DecimalFormat df = new DecimalFormat("0.00000");
             double result = price * 1000;
             String formattedPrice = df.format(result);
