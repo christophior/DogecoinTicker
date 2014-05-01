@@ -301,6 +301,14 @@ public class ExchangeFragment extends Fragment {
                 String bitcoin_dollar_value = String.valueOf((int)btcValueInUSD);
                 tv_btcLabel.setText(getResources().getText(R.string.btc_converter_label) + " ($" + bitcoin_dollar_value + ")");
 
+            } else {
+                if (percentChange < 0) {
+                    LinearLayout ll_title = (LinearLayout) getView().findViewById(R.id.title);
+                    LinearLayout ll_graph = (LinearLayout) getView().findViewById(R.id.graph);
+
+                    ll_title.setBackgroundColor(getResources().getColor(R.color.graph_background_color2));
+                    ll_graph.setBackgroundColor(getResources().getColor(R.color.graph_background_color2));
+                }
             }
         }
 
