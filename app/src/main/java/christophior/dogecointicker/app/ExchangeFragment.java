@@ -234,11 +234,23 @@ public class ExchangeFragment extends Fragment {
                 TextView tv_low = (TextView)getView().findViewById(R.id.low_text);
                 tv_low.setText(String.valueOf(lowPrice));
 
-//                TextView tv_current = (TextView)getView().findViewById(R.id.current_text);
-//                tv_current.setText(String.valueOf(MainActivity.prices[markets[MainActivity.currentFragment]]));
+                // need to fix current price, using highest price as placeholder
+                TextView tv_current = (TextView)getView().findViewById(R.id.current_text);
+                tv_current.setText(String.valueOf(String.valueOf(highPrice)));
 
                 TextView tv_change = (TextView)getView().findViewById(R.id.change_text);
                 tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
+
+                // change graph background based on percent change (need to implement for landscape mode)
+                if (percentChange < 0) {
+                    tv_change.setTextColor(getResources().getColor(R.color.negative_percent_change_text));
+
+                    LinearLayout ll_title = (LinearLayout) getView().findViewById(R.id.title);
+                    LinearLayout ll_graph = (LinearLayout) getView().findViewById(R.id.graph);
+
+                    ll_title.setBackgroundColor(getResources().getColor(R.color.graph_background_color2));
+                    ll_graph.setBackgroundColor(getResources().getColor(R.color.graph_background_color2));
+                }
 
                 TextView tv_title = (TextView)getView().findViewById(R.id.exchange_title);
                 tv_title.setText(markets[MainActivity.currentFragment]);

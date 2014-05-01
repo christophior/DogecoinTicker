@@ -48,7 +48,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="4"
-        android:background="#ff98b865"/>
+        android:background="@color/graph_background_color"/>
 
     <!-- Stats 3/10-->
     <LinearLayout
@@ -75,13 +75,13 @@
                 <TextView
                     android:id="@+id/change_text"
                     android:text="@string/na"
-                    android:textColor="@color/stat_label_color"
+                    android:textColor="@color/positive_percent_change_text"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
                     android:paddingTop="@dimen/stats_top_padding"
                     android:paddingLeft="@dimen/stats_left_padding"
-                    android:textSize="32sp"
+                    android:textSize="@dimen/stat_value_text"
                     android:gravity="left"/>
                 <TextView
                     android:layout_width="fill_parent"
@@ -111,7 +111,7 @@
                     android:layout_width="fill_parent"
                     android:paddingTop="@dimen/stats_top_padding"
                     android:paddingRight="@dimen/stats_right_padding"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/stat_value_text"
                     android:gravity="right"/>
                 <TextView
                     android:layout_width="fill_parent"
@@ -149,7 +149,7 @@
                     android:layout_width="fill_parent"
                     android:paddingTop="@dimen/stats_top_padding"
                     android:paddingLeft="@dimen/stats_left_padding"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/stat_value_text"
                     android:gravity="left"/>
                 <TextView
                     android:layout_width="fill_parent"
@@ -179,7 +179,7 @@
                     android:layout_width="fill_parent"
                     android:paddingTop="@dimen/stats_top_padding"
                     android:paddingRight="@dimen/stats_right_padding"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/stat_value_text"
                     android:gravity="right"/>
                 <TextView
                     android:layout_width="fill_parent"

@@ -9,9 +9,11 @@
     <dimen name="exchange_title_padding_left">15dp</dimen>
     <dimen name="exchange_title_padding_top">5dp</dimen>
     <dimen name="exchange_title_padding_bottom">15dp</dimen>
-    <dimen name="stats_top_padding">15dp</dimen>
+    <dimen name="stats_top_padding">5dp</dimen>
     <dimen name="stats_left_padding">25dp</dimen>
     <dimen name="stats_right_padding">25dp</dimen>
+    <dimen name="stat_value_text">25sp</dimen>
+
 
 
 </resources>
