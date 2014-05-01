@@ -69,6 +69,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:background="@drawable/borderframe"
                 android:layout_weight="1">
@@ -79,7 +80,6 @@
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
-                    android:paddingTop="@dimen/stats_top_padding"
                     android:paddingLeft="@dimen/stats_left_padding"
                     android:textSize="@dimen/stat_value_text"
                     android:gravity="left"/>
@@ -100,6 +100,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
@@ -109,7 +110,6 @@
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
-                    android:paddingTop="@dimen/stats_top_padding"
                     android:paddingRight="@dimen/stats_right_padding"
                     android:textSize="@dimen/stat_value_text"
                     android:gravity="right"/>
@@ -139,6 +139,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
@@ -147,7 +148,6 @@
                     android:textColor="@color/stat_label_color"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
-                    android:paddingTop="@dimen/stats_top_padding"
                     android:paddingLeft="@dimen/stats_left_padding"
                     android:textSize="@dimen/stat_value_text"
                     android:gravity="left"/>
@@ -170,6 +170,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical"
+                android:gravity="center_vertical"
                 android:layout_weight="1">
                 <TextView
                     android:id="@+id/high_text"
@@ -177,7 +178,6 @@
                     android:textColor="@color/stat_label_color"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
-                    android:paddingTop="@dimen/stats_top_padding"
                     android:paddingRight="@dimen/stats_right_padding"
                     android:textSize="@dimen/stat_value_text"
                     android:gravity="right"/>

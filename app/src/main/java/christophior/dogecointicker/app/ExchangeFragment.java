@@ -224,19 +224,22 @@ public class ExchangeFragment extends Fragment {
 //                graphView.setScalable(false);
             }
 
+            DecimalFormat df = new DecimalFormat("#");
+            df.setMaximumFractionDigits(5);
+
             LinearLayout layout = (LinearLayout)getView().findViewById(R.id.graph);
             layout.addView(graphView);
 
             if (getResources().getConfiguration().orientation == 1) {
                 TextView tv_high = (TextView)getView().findViewById(R.id.high_text);
-                tv_high.setText(String.valueOf(highPrice));
+                tv_high.setText(df.format(highPrice));
 
                 TextView tv_low = (TextView)getView().findViewById(R.id.low_text);
-                tv_low.setText(String.valueOf(lowPrice));
+                tv_low.setText(df.format(lowPrice));
 
                 // need to fix current price, using highest price as placeholder
                 TextView tv_current = (TextView)getView().findViewById(R.id.current_text);
-                tv_current.setText(String.valueOf(String.valueOf(highPrice)));
+                tv_current.setText(df.format(highPrice));
 
                 TextView tv_change = (TextView)getView().findViewById(R.id.change_text);
                 tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");

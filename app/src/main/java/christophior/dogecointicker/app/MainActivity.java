@@ -190,7 +190,7 @@ public class MainActivity extends Activity {
 	}
 
     public void intervalDialog() {
-        final CharSequence[] items = {"1 hour", "3 hours", "12 hours", "24 hours", "3 days"};
+        final CharSequence[] items = {"1 hour", "3 hours", "12 hours", "24 hours", "3 days", "7 days", "14 days", "30 days"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select Interval");
