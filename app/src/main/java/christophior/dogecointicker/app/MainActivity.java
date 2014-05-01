@@ -39,13 +39,13 @@ public class MainActivity extends Activity {
     private ProgressDialog pDialog;
     private static String urlMarketPrices = "http://doge.yottabyte.nu/json/markets.json";
     public static HashMap<String, Double> exchangePrices = new HashMap<String, Double>();
-    public final String[] EXCHANGES = new String[] { "Cryptsy", "CoinedUp",
+    static public final String[] EXCHANGES = new String[] { "Cryptsy", "CoinedUp",
             "Coins-E", "Bter", "Vircurex"};
 
     // Keep track of which fragment and time interval we're on
     static protected int currentFragment = 0;
     static protected int currentInterval = 3;
-    static protected double[] prices;
+    static protected double dogeConverterValue = 1000;
 
     AlertDialog levelDialog;
 
@@ -354,13 +354,28 @@ public class MainActivity extends Activity {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
             }
 
+            DecimalFormat menu = new DecimalFormat("#");
+            menu.setMinimumFractionDigits(5);
+            menu.setMaximumFractionDigits(5);
+
+            String cryptsyMenu = menu.format(exchangePrices.get("Cryptsy"));
+            String coinedupMenu = menu.format(exchangePrices.get("CoinedUp"));
+            String coinseMenu = menu.format(exchangePrices.get("Coins-E"));
+            String bterMenu = menu.format(exchangePrices.get("Bter"));
+            String vircurexMenu = menu.format(exchangePrices.get("Vircurex"));
+
+            navDrawerItems.get(0).setCount(cryptsyMenu + " mBTC");
+            navDrawerItems.get(1).setCount(coinedupMenu + " mBTC");
+            navDrawerItems.get(2).setCount(coinseMenu + " mBTC");
+            navDrawerItems.get(3).setCount(bterMenu + " mBTC");
+            navDrawerItems.get(4).setCount(vircurexMenu + " mBTC");
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
-            prices = new double[] {exchangePrices.get("Cryptsy"), exchangePrices.get("CoinedUp"),
-                    exchangePrices.get("Coins-E"), exchangePrices.get("Bter"), exchangePrices.get("Vircurex")};
+
         }
 
         public double formatPricemBTC(Double price){

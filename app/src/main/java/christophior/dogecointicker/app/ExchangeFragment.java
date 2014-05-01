@@ -23,6 +23,7 @@ import com.jjoe64.graphview.ValueDependentColor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.Double;
 import java.lang.Integer;
@@ -34,10 +35,13 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class ExchangeFragment extends Fragment {
 
     private static String urlExchange = "";
+    private static String urlBitcoinPrice = "http://doge.yottabyte.nu/json/fiat.json";
+
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphView.GraphViewData>();
     private ProgressDialog pDialog;
     public static double highPrice = -1.0, lowPrice = 9999.0, percentChange = 0.0;
@@ -47,6 +51,9 @@ public class ExchangeFragment extends Fragment {
     private String[] intervals = {"1h", "3h", "12h", "24h", "3d", "7d", "14d", "30d"};
     private String[] interval_labels = {"1 hour", "3 hours", "12 hours", "24 hours",
             "3 days", "7 days", "14 days", "30 days"};
+    private double btcValueInUSD = 0;
+    private double dogeCurrentValue = 0;
+    public double btcConverterValue = 0, usdConverterValue = 0;
 
     private FragmentTabHost mTabHost;
 
@@ -99,11 +106,15 @@ public class ExchangeFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... arg0) {
+            System.out.println("in exchange fragment");
             // Creating service handler class instance
             ServiceHandler sh = new ServiceHandler();
 
+            dogeCurrentValue = MainActivity.exchangePrices.get(MainActivity.EXCHANGES[MainActivity.currentFragment]);
             // Making a request to url and getting response
             String jsonData = sh.makeServiceCall(urlExchange, ServiceHandler.GET);
+            String jsonBitcoinPrice = sh.makeServiceCall(urlBitcoinPrice, ServiceHandler.GET);
+
             if (jsonData != null) {
                 try {
                     JSONArray jsonArrayRoot = new JSONArray(jsonData);
@@ -138,6 +149,16 @@ public class ExchangeFragment extends Fragment {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
             }
 
+            if (jsonBitcoinPrice != null){
+                try{
+                    JSONObject btcPrice = new JSONObject(jsonBitcoinPrice);
+                    btcValueInUSD = btcPrice.getDouble("usd");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.e("ServiceHandler", "Couldn't get any data from the url");
+            }
             return null;
         }
 
@@ -226,6 +247,9 @@ public class ExchangeFragment extends Fragment {
 
             DecimalFormat df = new DecimalFormat("#");
             df.setMaximumFractionDigits(5);
+            DecimalFormat currency = new DecimalFormat("#");
+            currency.setMinimumFractionDigits(2);
+            currency.setMaximumFractionDigits(2);
 
             LinearLayout layout = (LinearLayout)getView().findViewById(R.id.graph);
             layout.addView(graphView);
@@ -239,7 +263,7 @@ public class ExchangeFragment extends Fragment {
 
                 // need to fix current price, using highest price as placeholder
                 TextView tv_current = (TextView)getView().findViewById(R.id.current_text);
-                tv_current.setText(df.format(highPrice));
+                tv_current.setText(df.format(dogeCurrentValue));
 
                 TextView tv_change = (TextView)getView().findViewById(R.id.change_text);
                 tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
@@ -260,6 +284,23 @@ public class ExchangeFragment extends Fragment {
 
                 TextView tv_interval = (TextView)getView().findViewById(R.id.exchange_interval);
                 tv_interval.setText(interval_labels[MainActivity.currentInterval]);
+
+                TextView tv_dogeConverterValue = (TextView)getView().findViewById(R.id.dogecoin_converter_value);
+                tv_dogeConverterValue.setText(String.valueOf(MainActivity.dogeConverterValue));
+
+                btcConverterValue = MainActivity.dogeConverterValue*dogeCurrentValue/1000;
+                usdConverterValue = btcConverterValue * btcValueInUSD;
+
+                TextView tv_btcConverterValue = (TextView)getView().findViewById(R.id.btc_converter_value);
+                TextView tv_usdConverterValue = (TextView)getView().findViewById(R.id.usd_converter_value);
+                tv_btcConverterValue.setText(String.valueOf(btcConverterValue));
+                String usdValueString = currency.format(usdConverterValue);
+                tv_usdConverterValue.setText("$"+usdValueString);
+
+                TextView tv_btcLabel = (TextView)getView().findViewById(R.id.btc_converter_label);
+                String bitcoin_dollar_value = String.valueOf((int)btcValueInUSD);
+                tv_btcLabel.setText(getResources().getText(R.string.btc_converter_label) + " ($" + bitcoin_dollar_value + ")");
+
             }
         }
 

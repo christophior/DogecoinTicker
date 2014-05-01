@@ -233,7 +233,7 @@
 
             <!-- Dogecoin -->
             <LinearLayout
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:layout_width="0dip"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
@@ -277,7 +277,7 @@
 
             <!-- BTC -->
             <LinearLayout
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:layout_width="0dip"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
@@ -295,6 +295,7 @@
                     android:layout_centerVertical="true"
                     android:layout_height="0dp" />
                 <TextView
+                    android:id="@+id/btc_converter_label"
                     android:text="@string/btc_converter_label"
                     android:textColor="@color/converter_label_color"
                     android:layout_height="wrap_content"
@@ -322,7 +323,7 @@
 
             <!-- USD -->
             <LinearLayout
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:layout_width="0dip"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
