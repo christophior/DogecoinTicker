@@ -6,14 +6,26 @@
     <dimen name="stat_numbers">20dp</dimen>
     <dimen name="stat_labels">15dp</dimen>
     <dimen name="time_buttons">25dp</dimen>
+
+    <!-- exchange title -->
     <dimen name="exchange_title_text_size">25sp</dimen>
     <dimen name="exchange_title_padding_left">15dp</dimen>
     <dimen name="exchange_title_padding_top">5dp</dimen>
     <dimen name="exchange_title_padding_bottom">5dp</dimen>
+
+    <!-- stats -->
     <dimen name="stats_top_padding">5dp</dimen>
     <dimen name="stats_left_padding">25dp</dimen>
     <dimen name="stats_right_padding">25dp</dimen>
     <dimen name="stat_value_text">28sp</dimen>
+
+    <!-- currency converter -->
+    <dimen name="currency_converter_title_size">20sp</dimen>
+    <dimen name="converter_value_size">20sp</dimen>
+    <dimen name="converter_label_size">15sp</dimen>
+    <dimen name="converter_equals_size">25sp</dimen>
+
+
 
 
 

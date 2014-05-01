@@ -208,6 +208,7 @@
         android:layout_weight="2"
         android:background="#e3e3e3">
 
+        <!-- Converter Title -->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
@@ -216,33 +217,137 @@
 
             <TextView
                 android:text="@string/converter_title"
-                android:textSize="28dp"
+                android:textSize="@dimen/currency_converter_title_size"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
 
+        <!-- Converter Calculator -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="3">
 
+            <!-- Dogecoin -->
             <LinearLayout
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:layout_width="0dip"
-                android:layout_height="fill_parent"/>
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/dogecoin_converter_value"
+                    android:text="@string/na"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/converter_value_size"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="0dp" />
+                <TextView
+                    android:text="@string/dogecoin_converter_label"
+                    android:textColor="@color/converter_label_color"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/converter_label_size"
+                    android:gravity="center"/>
+            </LinearLayout>
 
+            <!-- = -->
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="0dip"
-                android:layout_height="fill_parent"/>
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_height="fill_parent">
 
+                <TextView
+                    android:text="@string/equals"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/converter_equals_size"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <!-- BTC -->
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="0dip"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/btc_converter_value"
+                    android:text="@string/na"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/converter_value_size"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="0dp" />
+                <TextView
+                    android:text="@string/btc_converter_label"
+                    android:textColor="@color/converter_label_color"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/converter_label_size"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <!-- = -->
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="0dip"
-                android:layout_height="fill_parent"/>
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:text="@string/equals"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/converter_equals_size"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <!-- USD -->
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="0dip"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/usd_converter_value"
+                    android:text="@string/na"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/converter_value_size"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="0dp" />
+                <TextView
+                    android:text="@string/usd_converter_label"
+                    android:textColor="@color/converter_label_color"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/converter_label_size"
+                    android:gravity="center"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

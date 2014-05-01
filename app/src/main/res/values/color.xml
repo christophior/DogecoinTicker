@@ -16,5 +16,7 @@
     <color name="label_color">#909090</color>
     <color name="positive_percent_change_text">#98b865</color>
     <color name="negative_percent_change_text">#CD6156</color>
+    <color name="converter_label_color">#888</color>
+
 
 </resources>

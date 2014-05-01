@@ -53,7 +53,13 @@
     <string name="low_label">lowest price</string>
     <string name="current_label">current price</string>
 
-    <string name="converter_title"></string>
+    <!-- strings for currency converter -->
+    <string name="converter_title">currency converter</string>
+    <string name="dogecoin_converter_label">DOGECOIN</string>
+    <string name="btc_converter_label">BTC</string>
+    <string name="usd_converter_label">USD</string>
+    <string name="equals">=</string>
+
 
 
     <string name="interval">Interval</string>
