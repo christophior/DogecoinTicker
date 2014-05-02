@@ -240,6 +240,7 @@
                 android:layout_height="fill_parent">
                 <TextView
                     android:id="@+id/dogecoin_converter_value"
+                    android:textStyle="bold"
                     android:text="@string/na"
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"

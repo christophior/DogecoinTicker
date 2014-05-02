@@ -375,7 +375,7 @@ public class MainActivity extends Activity {
 
         @Override
         protected void onPostExecute(Void result) {
-
+            adapter.notifyDataSetChanged();
         }
 
         public double formatPricemBTC(Double price){

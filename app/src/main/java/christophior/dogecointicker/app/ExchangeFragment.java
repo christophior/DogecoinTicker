@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -46,6 +47,10 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
 
     private static String urlExchange = "";
     private static String urlBitcoinPrice = "http://doge.yottabyte.nu/json/fiat.json";
+
+    DecimalFormat addCommas = new DecimalFormat("#,###");
+    DecimalFormat twoDigits = new DecimalFormat("#,###.00");
+
 
     ArrayList<GraphViewData> GraphData = new ArrayList<GraphView.GraphViewData>();
     private ProgressDialog pDialog;
@@ -101,8 +106,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
             alert.setMessage("How many DOGE");
 
             final EditText input = new EditText(getActivity());
-            input.setInputType(InputType.TYPE_CLASS_NUMBER
-                    | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
             alert.setView(input);
 
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -110,20 +114,19 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                     String value = input.getText().toString();
                     MainActivity.dogeConverterValue = Double.parseDouble(value);
 
-                    DecimalFormat currency = new DecimalFormat("#");
-                    currency.setMinimumFractionDigits(2);
-                    currency.setMaximumFractionDigits(2);
-                    
+                    DecimalFormat sixDigitsOrLess = new DecimalFormat("#");
+                    sixDigitsOrLess.setMaximumFractionDigits(6);
+
                     TextView tv_dogeConverterValue = (TextView)getView().findViewById(R.id.dogecoin_converter_value);
-                    tv_dogeConverterValue.setText(String.valueOf(MainActivity.dogeConverterValue));
+                    tv_dogeConverterValue.setText(addCommas.format((int)MainActivity.dogeConverterValue));
 
                     btcConverterValue = MainActivity.dogeConverterValue*dogeCurrentValue/1000;
                     usdConverterValue = btcConverterValue * btcValueInUSD;
 
                     TextView tv_btcConverterValue = (TextView)getView().findViewById(R.id.btc_converter_value);
                     TextView tv_usdConverterValue = (TextView)getView().findViewById(R.id.usd_converter_value);
-                    tv_btcConverterValue.setText(String.valueOf(btcConverterValue));
-                    String usdValueString = currency.format(usdConverterValue);
+                    tv_btcConverterValue.setText(String.valueOf(sixDigitsOrLess.format(btcConverterValue)));
+                    String usdValueString = twoDigits.format(usdConverterValue);
                     tv_usdConverterValue.setText("$"+usdValueString);
                 }
             });
@@ -277,25 +280,25 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
 //                graphView.setScalable(false);
             }
 
-            DecimalFormat df = new DecimalFormat("#");
-            df.setMaximumFractionDigits(5);
-            DecimalFormat currency = new DecimalFormat("#");
-            currency.setMinimumFractionDigits(2);
-            currency.setMaximumFractionDigits(2);
+            DecimalFormat fiveDigitsOrLess = new DecimalFormat("#");
+            fiveDigitsOrLess.setMaximumFractionDigits(5);
+
+            DecimalFormat sixDigitsOrLess = new DecimalFormat("#");
+            sixDigitsOrLess.setMaximumFractionDigits(6);
 
             LinearLayout layout = (LinearLayout)getView().findViewById(R.id.graph);
             layout.addView(graphView);
 
             if (getResources().getConfiguration().orientation == 1) {
                 TextView tv_high = (TextView)getView().findViewById(R.id.high_text);
-                tv_high.setText(df.format(highPrice));
+                tv_high.setText(fiveDigitsOrLess.format(highPrice));
 
                 TextView tv_low = (TextView)getView().findViewById(R.id.low_text);
-                tv_low.setText(df.format(lowPrice));
+                tv_low.setText(fiveDigitsOrLess.format(lowPrice));
 
                 // need to fix current price, using highest price as placeholder
                 TextView tv_current = (TextView)getView().findViewById(R.id.current_text);
-                tv_current.setText(df.format(dogeCurrentValue));
+                tv_current.setText(fiveDigitsOrLess.format(dogeCurrentValue));
 
                 TextView tv_change = (TextView)getView().findViewById(R.id.change_text);
                 tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
@@ -318,15 +321,15 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                 tv_interval.setText(interval_labels[MainActivity.currentInterval]);
 
                 TextView tv_dogeConverterValue = (TextView)getView().findViewById(R.id.dogecoin_converter_value);
-                tv_dogeConverterValue.setText(String.valueOf(MainActivity.dogeConverterValue));
+                tv_dogeConverterValue.setText(addCommas.format((int)MainActivity.dogeConverterValue));
 
                 btcConverterValue = MainActivity.dogeConverterValue*dogeCurrentValue/1000;
                 usdConverterValue = btcConverterValue * btcValueInUSD;
 
                 TextView tv_btcConverterValue = (TextView)getView().findViewById(R.id.btc_converter_value);
                 TextView tv_usdConverterValue = (TextView)getView().findViewById(R.id.usd_converter_value);
-                tv_btcConverterValue.setText(String.valueOf(btcConverterValue));
-                String usdValueString = currency.format(usdConverterValue);
+                tv_btcConverterValue.setText(String.valueOf(sixDigitsOrLess.format(btcConverterValue)));
+                String usdValueString = twoDigits.format(usdConverterValue);
                 tv_usdConverterValue.setText("$"+usdValueString);
 
                 TextView tv_btcLabel = (TextView)getView().findViewById(R.id.btc_converter_label);
