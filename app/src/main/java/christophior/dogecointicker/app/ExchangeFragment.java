@@ -1,15 +1,19 @@
 package christophior.dogecointicker.app;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,8 +40,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import android.view.View.OnClickListener;
 
-public class ExchangeFragment extends Fragment {
+public class ExchangeFragment extends Fragment implements OnClickListener {
 
     private static String urlExchange = "";
     private static String urlBitcoinPrice = "http://doge.yottabyte.nu/json/fiat.json";
@@ -55,8 +60,6 @@ public class ExchangeFragment extends Fragment {
     private double dogeCurrentValue = 0;
     public double btcConverterValue = 0, usdConverterValue = 0;
 
-    private FragmentTabHost mTabHost;
-
     public ExchangeFragment() {
     }
 
@@ -66,16 +69,16 @@ public class ExchangeFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_exchange, container, false);
 
+        TextView DogeConverterValue = (TextView) rootView.findViewById(R.id.dogecoin_converter_value);
+        DogeConverterValue.setOnClickListener(this);
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-//        Bundle b = getIntent().getExtras();
-        // get API url
-//        String market = b.getString("market");
         urlExchange = ("http://doge.yottabyte.nu/json/" + markets[MainActivity.currentFragment] + "/" + intervals[MainActivity.currentInterval]+ ".json");
+
         // reset stats
         highPrice = -1.0;
         lowPrice = 9999.0;
@@ -90,13 +93,55 @@ public class ExchangeFragment extends Fragment {
         (new GetJson()).execute();
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.dogecoin_converter_value) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+            alert.setMessage("How many DOGE");
+
+            final EditText input = new EditText(getActivity());
+            input.setInputType(InputType.TYPE_CLASS_NUMBER
+                    | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            alert.setView(input);
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String value = input.getText().toString();
+                    MainActivity.dogeConverterValue = Double.parseDouble(value);
+
+                    DecimalFormat currency = new DecimalFormat("#");
+                    currency.setMinimumFractionDigits(2);
+                    currency.setMaximumFractionDigits(2);
+                    
+                    TextView tv_dogeConverterValue = (TextView)getView().findViewById(R.id.dogecoin_converter_value);
+                    tv_dogeConverterValue.setText(String.valueOf(MainActivity.dogeConverterValue));
+
+                    btcConverterValue = MainActivity.dogeConverterValue*dogeCurrentValue/1000;
+                    usdConverterValue = btcConverterValue * btcValueInUSD;
+
+                    TextView tv_btcConverterValue = (TextView)getView().findViewById(R.id.btc_converter_value);
+                    TextView tv_usdConverterValue = (TextView)getView().findViewById(R.id.usd_converter_value);
+                    tv_btcConverterValue.setText(String.valueOf(btcConverterValue));
+                    String usdValueString = currency.format(usdConverterValue);
+                    tv_usdConverterValue.setText("$"+usdValueString);
+                }
+            });
+
+            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                }
+            });
+
+            alert.show();
+        }
+    }
 
     private class GetJson extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            // Showing progress dialog
             pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
@@ -111,7 +156,7 @@ public class ExchangeFragment extends Fragment {
             ServiceHandler sh = new ServiceHandler();
 
             dogeCurrentValue = MainActivity.exchangePrices.get(MainActivity.EXCHANGES[MainActivity.currentFragment]);
-            // Making a request to url and getting response
+
             String jsonData = sh.makeServiceCall(urlExchange, ServiceHandler.GET);
             String jsonBitcoinPrice = sh.makeServiceCall(urlBitcoinPrice, ServiceHandler.GET);
 
@@ -134,10 +179,8 @@ public class ExchangeFragment extends Fragment {
                             highPrice = price;
                         if (price < lowPrice)
                             lowPrice = price;
-
-//                        System.out.println("added trade(" + time + ", " + price + ") to graph");
-//                        System.out.println(time);
                     }
+
                     double first = (trades.getJSONArray(0)).getDouble(1);
                     double last = (trades.getJSONArray(trades.length() - 1)).getDouble(1);
                     percentChange = (last - first) / (first) * 100;
@@ -165,22 +208,11 @@ public class ExchangeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-//            super.onPostExecute(result);
-//            // Dismiss the progress dialog
+
             if (pDialog.isShowing())
                 pDialog.dismiss();
-//            /**
-//             * Updating parsed JSON data into view
-//             * */
-//
+
             System.out.println("creating graph");
-//            GraphViewSeriesStyle seriesStyle = new GraphViewSeriesStyle();
-//            seriesStyle.setValueDependentColor(new ValueDependentColor() {
-//                @Override
-//                public int get(GraphViewDataInterface data) {
-//                    return Color.rgb(0, 153, 0);
-//                }
-//            });
 
             // init series data
             GraphViewSeries.GraphViewSeriesStyle seriesStyle = new GraphViewSeries.GraphViewSeriesStyle(Color.WHITE, 4);
@@ -308,7 +340,6 @@ public class ExchangeFragment extends Fragment {
                 }
             }
         }
-
 
         public double formatPricemBTC(Double price) {
             DecimalFormat df = new DecimalFormat("0.00000");
