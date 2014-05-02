@@ -103,7 +103,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
         if (v.getId() == R.id.dogecoin_converter_value) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
-            alert.setMessage("How many DOGE");
+            alert.setMessage("Enter your amount of Doge.");
 
             final EditText input = new EditText(getActivity());
             input.setInputType(InputType.TYPE_CLASS_NUMBER);
