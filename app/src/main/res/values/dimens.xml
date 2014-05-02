@@ -17,11 +17,11 @@
     <dimen name="stats_top_padding">5dp</dimen>
     <dimen name="stats_left_padding">25dp</dimen>
     <dimen name="stats_right_padding">25dp</dimen>
-    <dimen name="stat_value_text">28sp</dimen>
+    <dimen name="stat_value_text">25sp</dimen>
 
     <!-- currency converter -->
-    <dimen name="currency_converter_title_size">25sp</dimen>
-    <dimen name="converter_value_size">20sp</dimen>
+    <dimen name="currency_converter_title_size">18sp</dimen>
+    <dimen name="converter_value_size">18sp</dimen>
     <dimen name="converter_label_size">15sp</dimen>
     <dimen name="converter_equals_size">25sp</dimen>
 
