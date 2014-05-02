@@ -74,8 +74,10 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
 
         View rootView = inflater.inflate(R.layout.fragment_exchange, container, false);
 
-        TextView DogeConverterValue = (TextView) rootView.findViewById(R.id.dogecoin_converter_value);
-        DogeConverterValue.setOnClickListener(this);
+        if (getResources().getConfiguration().orientation == 1) {
+            TextView DogeConverterValue = (TextView) rootView.findViewById(R.id.dogecoin_converter_value);
+            DogeConverterValue.setOnClickListener(this);
+        }
         return rootView;
     }
 
@@ -265,12 +267,12 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                 // optional - activate scaling / zooming
 //                graphView.setScalable(false);
             } else {
-                graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
+                graphView.getGraphViewStyle().setGridColor(Color.BLACK);
 //              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
                 graphView.getGraphViewStyle().setTextSize(22);
-                graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.DKGRAY);
-                graphView.getGraphViewStyle().setVerticalLabelsColor(Color.DKGRAY);
+                graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
+                graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
                 graphView.getGraphViewStyle().setNumHorizontalLabels(13);
                 graphView.getGraphViewStyle().setNumVerticalLabels(15);
                 graphView.getGraphViewStyle().setVerticalLabelsWidth(100);
@@ -291,14 +293,14 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
 
             if (getResources().getConfiguration().orientation == 1) {
                 TextView tv_high = (TextView)getView().findViewById(R.id.high_text);
-                tv_high.setText(fiveDigitsOrLess.format(highPrice));
+                tv_high.setText(sixDigitsOrLess.format(highPrice));
 
                 TextView tv_low = (TextView)getView().findViewById(R.id.low_text);
-                tv_low.setText(fiveDigitsOrLess.format(lowPrice));
+                tv_low.setText(sixDigitsOrLess.format(lowPrice));
 
                 // need to fix current price, using highest price as placeholder
                 TextView tv_current = (TextView)getView().findViewById(R.id.current_text);
-                tv_current.setText(fiveDigitsOrLess.format(dogeCurrentValue));
+                tv_current.setText(sixDigitsOrLess.format(dogeCurrentValue));
 
                 TextView tv_change = (TextView)getView().findViewById(R.id.change_text);
                 tv_change.setText((new DecimalFormat("0.00")).format(percentChange) + "%");
