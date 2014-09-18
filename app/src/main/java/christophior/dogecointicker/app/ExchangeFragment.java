@@ -60,7 +60,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
     public static double highPrice = -1.0, lowPrice = 9999.0, percentChange = 0.0;
     boolean EveryOtherLine = true;
     int startingHour, xAxisCount = 0;
-    private String[] markets = {"cryptsy", "coinedup", "coins-e", "bter", "vircurex"};
+    private String[] markets = {"cryptsy", "coins-e", "bter", "vircurex"};
     private String[] intervals = {"1h", "3h", "12h", "24h", "3d", "7d", "14d", "30d"};
     private String[] interval_labels = {"1 hour", "3 hours", "12 hours", "24 hours",
             "3 days", "7 days", "14 days", "30 days"};
@@ -236,26 +236,37 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                         if (EveryOtherLine){
                             EveryOtherLine = false;
                             xAxisCount+=2;
-                            SimpleDateFormat sim = new SimpleDateFormat("hh:00a");
+                            SimpleDateFormat sim = null;
                             long time = (long)value;
                             Date date = new Date(time);
 
                             switch (MainActivity.currentInterval){
                                 case 0: //1h
+                                    sim = new SimpleDateFormat("kk:mm");
                                     break;
                                 case 1: //3h
+                                    sim = new SimpleDateFormat("kk:mm");
                                     break;
                                 case 2: //12h
+                                    sim = new SimpleDateFormat("kk:00");
                                     break;
                                 case 3: //24h
+                                    sim = new SimpleDateFormat("kk:00");
                                     break;
                                 case 4: //3d
+                                    sim = new SimpleDateFormat("MM/dd kk:00");
                                     break;
                                 case 5: //7d
+                                    sim = new SimpleDateFormat("MM/dd kk:00");
                                     break;
                                 case 6: //14d
+                                    sim = new SimpleDateFormat("MMM dd");
                                     break;
                                 case 7: //30d
+                                    sim = new SimpleDateFormat("MMM dd");
+                                    break;
+                                default:
+                                    sim = new SimpleDateFormat("kk:00");
                                     break;
                             }
 

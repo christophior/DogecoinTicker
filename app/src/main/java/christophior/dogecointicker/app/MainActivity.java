@@ -39,8 +39,7 @@ public class MainActivity extends Activity {
     private ProgressDialog pDialog;
     private static String urlMarketPrices = "http://doge.yottabyte.nu/json/markets.json";
     public static HashMap<String, Double> exchangePrices = new HashMap<String, Double>();
-    static public final String[] EXCHANGES = new String[] { "Cryptsy", "CoinedUp",
-            "Coins-E", "Bter", "Vircurex"};
+    static public final String[] EXCHANGES = new String[] { "Cryptsy", "Coins-E", "Bter", "Vircurex"};
 
     // Keep track of which fragment and time interval we're on
     static protected int currentFragment = 0;
@@ -90,16 +89,11 @@ public class MainActivity extends Activity {
 
 
 		// adding nav drawer items to array
-		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], 0, true, Double.toString(exchangePrices.get("Cryptsy")) + " mBTC"));
-		// Find People
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], 0, true, Double.toString(exchangePrices.get("CoinedUp")) + " mBTC"));
-		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], 0, true, Double.toString(exchangePrices.get("Coins-E")) + " mBTC"));
-		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], 0, true, Double.toString(exchangePrices.get("Bter")) + " mBTC"));
-		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], 0, true, Double.toString(exchangePrices.get("Vircurex")) + " mBTC"));
+//		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], 0, true, Double.toString(exchangePrices.get("CoinedUp")) + " mBTC"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], 0, true, Double.toString(exchangePrices.get("Coins-E")) + " mBTC"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], 0, true, Double.toString(exchangePrices.get("Bter")) + " mBTC"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], 0, true, Double.toString(exchangePrices.get("Vircurex")) + " mBTC"));
 
 		
 
@@ -137,8 +131,8 @@ public class MainActivity extends Activity {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
-			// on first time display view for first nav item
-			displayView(5);
+			// on first time display view for home screen
+			displayView(4);
 		}
 	}
 
@@ -228,7 +222,7 @@ public class MainActivity extends Activity {
         (new GetJson()).execute();
 
         switch (position) {
-        case 5: // home screen
+        case 4: // home screen
             fragment = new HomeFragment();
             break;
 		case 0:
@@ -244,10 +238,6 @@ public class MainActivity extends Activity {
 			fragment = new ExchangeFragment();
 			break;
 		case 3:
-            currentFragment = position;
-			fragment = new ExchangeFragment();
-			break;
-		case 4:
             currentFragment = position;
 			fragment = new ExchangeFragment();
 			break;
@@ -343,7 +333,7 @@ public class MainActivity extends Activity {
                     }
 
                     System.out.println("Cryptsy Price: " + exchangePrices.get("Cryptsy"));
-                    System.out.println("CoinedUp Price: " + exchangePrices.get("CoinedUp"));
+//                    System.out.println("CoinedUp Price: " + exchangePrices.get("CoinedUp"));
                     System.out.println("Coins-E Price: " + exchangePrices.get("Coins-E"));
                     System.out.println("Bter Price: " + exchangePrices.get("Bter"));
                     System.out.println("Vircurex Price: " + exchangePrices.get("Vircurex"));
@@ -359,16 +349,16 @@ public class MainActivity extends Activity {
             menu.setMaximumFractionDigits(5);
 
             String cryptsyMenu = menu.format(exchangePrices.get("Cryptsy"));
-            String coinedupMenu = menu.format(exchangePrices.get("CoinedUp"));
+//            String coinedupMenu = menu.format(exchangePrices.get("CoinedUp"));
             String coinseMenu = menu.format(exchangePrices.get("Coins-E"));
             String bterMenu = menu.format(exchangePrices.get("Bter"));
             String vircurexMenu = menu.format(exchangePrices.get("Vircurex"));
 
             navDrawerItems.get(0).setCount(cryptsyMenu + " mBTC");
-            navDrawerItems.get(1).setCount(coinedupMenu + " mBTC");
-            navDrawerItems.get(2).setCount(coinseMenu + " mBTC");
-            navDrawerItems.get(3).setCount(bterMenu + " mBTC");
-            navDrawerItems.get(4).setCount(vircurexMenu + " mBTC");
+//            navDrawerItems.get(1).setCount(coinedupMenu + " mBTC");
+            navDrawerItems.get(1).setCount(coinseMenu + " mBTC");
+            navDrawerItems.get(2).setCount(bterMenu + " mBTC");
+            navDrawerItems.get(3).setCount(vircurexMenu + " mBTC");
 
             return null;
         }
