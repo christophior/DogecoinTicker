@@ -10,5 +10,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/dogecoin_splash"/>
+        android:src="@drawable/dogecoin_splash_horizontal"/>
 </LinearLayout>
