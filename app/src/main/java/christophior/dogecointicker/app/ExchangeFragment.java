@@ -42,6 +42,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import android.view.View.OnClickListener;
+import java.text.DateFormat;
+import java.util.Date;
+
 
 public class ExchangeFragment extends Fragment implements OnClickListener {
 
@@ -232,9 +235,31 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                     if (isValueX) {
                         if (EveryOtherLine){
                             EveryOtherLine = false;
-                            int hourVal = (startingHour + xAxisCount) % 24;
                             xAxisCount+=2;
-                            return hourVal + ":00";
+                            SimpleDateFormat sim = new SimpleDateFormat("hh:00a");
+                            long time = (long)value;
+                            Date date = new Date(time);
+
+                            switch (MainActivity.currentInterval){
+                                case 0: //1h
+                                    break;
+                                case 1: //3h
+                                    break;
+                                case 2: //12h
+                                    break;
+                                case 3: //24h
+                                    break;
+                                case 4: //3d
+                                    break;
+                                case 5: //7d
+                                    break;
+                                case 6: //14d
+                                    break;
+                                case 7: //30d
+                                    break;
+                            }
+
+                            return sim.format(date);
                         } else {
                             EveryOtherLine = true;
                             xAxisCount+=2;
