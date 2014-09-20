@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.AsyncTask;
@@ -150,11 +152,14 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            // lock rotation while getting data
+            mLockScreenRotation();
+
             pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
-//
         }
 
         @Override
@@ -210,6 +215,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
             } else {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
             }
+
             return null;
         }
 
@@ -380,6 +386,9 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                     ll_graph.setBackgroundColor(getResources().getColor(R.color.graph_background_color2));
                 }
             }
+
+            // unlock rotation
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
 
         public double formatPricemBTC(Double price) {
@@ -387,6 +396,17 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
             double result = price * 1000;
             String formattedPrice = df.format(result);
             return Double.parseDouble(formattedPrice);
+        }
+
+        private void mLockScreenRotation() {
+            switch (getResources().getConfiguration().orientation){
+                case Configuration.ORIENTATION_PORTRAIT:
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    break;
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    break;
+            }
         }
     }
 }
