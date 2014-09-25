@@ -292,6 +292,8 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
             // set styles
             if (getResources().getConfiguration().orientation == 1) {
                 graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
+//                ((LineGraphView)graphView).setDrawBackground(true);
+//                ((LineGraphView)graphView).setBackgroundColor(Color.rgb(185, 224, 123));
 //              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
 //                graphView.getGraphViewStyle().setTextSize(100);
@@ -303,7 +305,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                 // optional - activate scaling / zooming
 //                graphView.setScalable(false);
             } else {
-                graphView.getGraphViewStyle().setGridColor(Color.BLACK);
+                graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
 //              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
 //              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
                 graphView.getGraphViewStyle().setTextSize(22);
@@ -350,6 +352,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
 
                     ll_title.setBackgroundColor(getResources().getColor(R.color.graph_background_color2));
                     ll_graph.setBackgroundColor(getResources().getColor(R.color.graph_background_color2));
+//                    ((LineGraphView)graphView).setBackgroundColor(Color.rgb(247, 115, 101));
                 }
 
                 TextView tv_title = (TextView)getView().findViewById(R.id.exchange_title);
@@ -378,6 +381,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                 if (percentChange < 0) {
                     LinearLayout ll_graph = (LinearLayout) getView().findViewById(R.id.graph);
                     ll_graph.setBackgroundColor(getResources().getColor(R.color.graph_background_color2));
+//                    ((LineGraphView)graphView).setBackgroundColor(Color.rgb(185, 224, 123));
                 }
             }
         }

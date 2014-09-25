@@ -12,6 +12,8 @@
     <color name="exchange_interval_color">#ffdddddd</color>
     <color name="graph_background_color">#98b865</color>
     <color name="graph_background_color2">#CD6156</color>
+    <color name="under_graph_background_color">#B9E07B</color>
+    <color name="under_graph_background_color2">#F77365</color>
     <color name="stat_label_color">#333</color>
     <color name="label_color">#909090</color>
     <color name="positive_percent_change_text">#98b865</color>
