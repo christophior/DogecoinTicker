@@ -50,7 +50,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         PendingIntent pendingUpdate = PendingIntent.getBroadcast(context, 0, updateIntent, 0);
 
         if (prefs.getBoolean(("Cryptsy"), true) ||
-                prefs.getBoolean(("CoinedUp"), true) ||
                 prefs.getBoolean(("Coins-E"), true) ||
                 prefs.getBoolean(("Bter"), true) ||
                 prefs.getBoolean(("Vircurex"), true)) {
@@ -64,9 +63,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         if (prefs.getBoolean(("Cryptsy"), false))
             inboxStyle.addLine("1 Doge = " + exchangePrices.get("Cryptsy")
                     + " mBTC @ Cryptsy");
-        if (prefs.getBoolean(("CoinedUp"), false))
-            inboxStyle.addLine("1 Doge = " + exchangePrices.get("CoinedUp")
-                    + " mBTC @ CoinedUp");
         if (prefs.getBoolean(("Coins-E"), false))
             inboxStyle.addLine("1 Doge = " + exchangePrices.get("Coins-E")
                     + " mBTC @ Coins-E");
@@ -114,8 +110,6 @@ public class NotificationReceiver extends BroadcastReceiver {
 
             if (exchange.equals("cryptsy")) {
                 exchangePrices.put("Cryptsy", formatPricemBTC(price));
-            } else if (exchange.equals("coinedup")) {
-                exchangePrices.put("CoinedUp", formatPricemBTC(price));
             } else if (exchange.equals("coins-e")) {
                 exchangePrices.put("Coins-E", formatPricemBTC(price));
             } else if (exchange.equals("bter")) {
@@ -143,7 +137,6 @@ public class NotificationReceiver extends BroadcastReceiver {
                     }
 
                     System.out.println("Cryptsy Price: " + exchangePrices.get("Cryptsy"));
-                    System.out.println("CoinedUp Price: " + exchangePrices.get("CoinedUp"));
                     System.out.println("Coins-E Price: " + exchangePrices.get("Coins-E"));
                     System.out.println("Bter Price: " + exchangePrices.get("Bter"));
                     System.out.println("Vircurex Price: " + exchangePrices.get("Vircurex"));
@@ -161,8 +154,8 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         @Override
         protected void onPostExecute(Void result) {
-            double[] prices = {exchangePrices.get("Cryptsy"), exchangePrices.get("CoinedUp"),
-                    exchangePrices.get("Coins-E"), exchangePrices.get("Bter"), exchangePrices.get("Vircurex")};
+            double[] prices = {exchangePrices.get("Cryptsy"), exchangePrices.get("Coins-E"),
+                    exchangePrices.get("Bter"), exchangePrices.get("Vircurex")};
         }
 
         public double formatPricemBTC(Double price) {

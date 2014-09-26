@@ -11,12 +11,6 @@
             android:summary="" />
 
         <CheckBoxPreference
-            android:key="CoinedUp"
-            android:title="CoinedUp"
-            android:defaultValue="false"
-            android:summary="" />
-
-        <CheckBoxPreference
             android:key="Coins-E"
             android:title="Coins-E"
             android:defaultValue="false"

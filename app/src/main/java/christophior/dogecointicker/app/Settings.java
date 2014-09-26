@@ -86,7 +86,6 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         PendingIntent pendingUpdate = PendingIntent.getBroadcast(this, 0, updateIntent, 0);
 
         if (sharedPreferences.getBoolean(("Cryptsy"), true) ||
-                sharedPreferences.getBoolean(("CoinedUp"), true) ||
                 sharedPreferences.getBoolean(("Coins-E"), true) ||
                 sharedPreferences.getBoolean(("Bter"), true) ||
                 sharedPreferences.getBoolean(("Vircurex"), true)) {
@@ -100,9 +99,6 @@ public class Settings extends PreferenceActivity implements SharedPreferences.On
         if (sharedPreferences.getBoolean(("Cryptsy"), false))
             inboxStyle.addLine("1 Doge = " + MainActivity.exchangePrices.get("Cryptsy")
                     + " " + currentCurrency + " @ Cryptsy");
-        if (sharedPreferences.getBoolean(("CoinedUp"), false))
-            inboxStyle.addLine("1 Doge = " + MainActivity.exchangePrices.get("CoinedUp")
-                    + " " + currentCurrency + " @ CoinedUp");
         if (sharedPreferences.getBoolean(("Coins-E"), false))
             inboxStyle.addLine("1 Doge = " + MainActivity.exchangePrices.get("Coins-E")
                     + " " + currentCurrency + " @ Coins-E");

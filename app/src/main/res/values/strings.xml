@@ -36,9 +36,11 @@
     <string name="title_activity_coinse">Coins-E</string>
     <string name="title_activity_bter">Bter</string>
     <string name="title_activity_vircurex">Vircurex</string>
+
     <string name="satoshi_currency">Satoshi</string>
     <string name="BTC_currency">BTC</string>
     <string name="mBTC_currency">mBTC</string>
+
     <string name="notification_tray">Show in Notification Tray</string>
     <string name="currency_to_use">Currency To Use With App</string>
     <string name="refresh">Refresh</string>

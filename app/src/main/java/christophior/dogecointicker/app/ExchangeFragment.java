@@ -297,32 +297,25 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
             graphView.addSeries(series); // data
             // set styles
             if (getResources().getConfiguration().orientation == 1) {
+//              ((LineGraphView)graphView).setDrawBackground(true);
+//              ((LineGraphView)graphView).setBackgroundColor(Color.rgb(185, 224, 123));
                 graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
-//                ((LineGraphView)graphView).setDrawBackground(true);
-//                ((LineGraphView)graphView).setBackgroundColor(Color.rgb(185, 224, 123));
-//              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
-//              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
-//                graphView.getGraphViewStyle().setTextSize(100);
                 graphView.getGraphViewStyle().setNumHorizontalLabels(1);
                 graphView.getGraphViewStyle().setNumVerticalLabels(1);
                 graphView.getGraphViewStyle().setVerticalLabelsWidth(1);
-//              graphView.setViewPort(2, 40);
-//              graphView.setScrollable(true);
-                // optional - activate scaling / zooming
+//                graphView.setViewPort(2, 40);
+//                graphView.setScrollable(true);
 //                graphView.setScalable(false);
             } else {
                 graphView.getGraphViewStyle().setGridColor(Color.DKGRAY);
-//              graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.YELLOW);
-//              graphView.getGraphViewStyle().setVerticalLabelsColor(Color.RED);
                 graphView.getGraphViewStyle().setTextSize(22);
                 graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
                 graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
                 graphView.getGraphViewStyle().setNumHorizontalLabels(13);
                 graphView.getGraphViewStyle().setNumVerticalLabels(15);
                 graphView.getGraphViewStyle().setVerticalLabelsWidth(100);
-//              graphView.setViewPort(2, 40);
-//              graphView.setScrollable(true);
-                // optional - activate scaling / zooming
+//                graphView.setViewPort(2, 40);
+//                graphView.setScrollable(true);
 //                graphView.setScalable(false);
             }
 
