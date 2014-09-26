@@ -203,6 +203,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                 }
             } else {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
+                Log.e("ServiceHandler", urlExchange);
             }
 
             if (jsonBitcoinPrice != null){
@@ -214,6 +215,7 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                 }
             } else {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
+                Log.e("ServiceHandler", urlBitcoinPrice);
             }
 
             return null;

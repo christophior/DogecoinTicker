@@ -49,10 +49,8 @@ public class NotificationReceiver extends BroadcastReceiver {
         updateIntent.setAction(UPDATE_NOTI);
         PendingIntent pendingUpdate = PendingIntent.getBroadcast(context, 0, updateIntent, 0);
 
-        if (prefs.getBoolean(("Cryptsy"), true) ||
-                prefs.getBoolean(("Coins-E"), true) ||
-                prefs.getBoolean(("Bter"), true) ||
-                prefs.getBoolean(("Vircurex"), true)) {
+        if (prefs.getBoolean(("Cryptsy"), true) || prefs.getBoolean(("Coins-E"), true) ||
+               prefs.getBoolean(("Bter"), true) || prefs.getBoolean(("Vircurex"), true)) {
             mBuilder.setStyle(inboxStyle);
             mBuilder.setSmallIcon(R.drawable.ic_launcher);
             mBuilder.setOngoing(true);
@@ -136,10 +134,10 @@ public class NotificationReceiver extends BroadcastReceiver {
                         updateExchangePrice(singleMarket.getString("m"), singleMarket.getDouble("l"));
                     }
 
-                    System.out.println("Cryptsy Price: " + exchangePrices.get("Cryptsy"));
-                    System.out.println("Coins-E Price: " + exchangePrices.get("Coins-E"));
-                    System.out.println("Bter Price: " + exchangePrices.get("Bter"));
-                    System.out.println("Vircurex Price: " + exchangePrices.get("Vircurex"));
+//                    System.out.println("Cryptsy Price: " + exchangePrices.get("Cryptsy"));
+//                    System.out.println("Coins-E Price: " + exchangePrices.get("Coins-E"));
+//                    System.out.println("Bter Price: " + exchangePrices.get("Bter"));
+//                    System.out.println("Vircurex Price: " + exchangePrices.get("Vircurex"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();

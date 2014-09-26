@@ -90,11 +90,10 @@ public class MainActivity extends Activity {
 
 		// adding nav drawer items to array
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], 0, true, Double.toString(exchangePrices.get("Cryptsy")) + " mBTC"));
-//		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], 0, true, Double.toString(exchangePrices.get("CoinedUp")) + " mBTC"));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], 0, true, Double.toString(exchangePrices.get("Coins-E")) + " mBTC"));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], 0, true, Double.toString(exchangePrices.get("Bter")) + " mBTC"));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], 0, true, Double.toString(exchangePrices.get("Vircurex")) + " mBTC"));
-
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], 0, true, Double.toString(exchangePrices.get("Vircurex")) + " mBTC"));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], 0, true, ""));
 		
 
 		// Recycle the typed array
@@ -132,7 +131,7 @@ public class MainActivity extends Activity {
 
 		if (savedInstanceState == null) {
 			// on first time display view for home screen
-			displayView(4);
+			displayView(5);
 		}
 	}
 
@@ -207,9 +206,10 @@ public class MainActivity extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// if nav drawer is opened, hide the action items
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        boolean isDonateOrHome = currentFragment == 4 || currentFragment == 5;
         menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-        menu.findItem(R.id.action_refresh).setVisible(!drawerOpen);
-        menu.findItem(R.id.action_interval).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_refresh).setVisible(!drawerOpen && !isDonateOrHome);
+        menu.findItem(R.id.action_interval).setVisible(!drawerOpen && !isDonateOrHome);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -222,9 +222,6 @@ public class MainActivity extends Activity {
         (new GetJson()).execute();
 
         switch (position) {
-        case 4: // home screen
-            fragment = new HomeFragment();
-            break;
 		case 0:
             currentFragment = position;
 			fragment = new ExchangeFragment();
@@ -241,7 +238,14 @@ public class MainActivity extends Activity {
             currentFragment = position;
 			fragment = new ExchangeFragment();
 			break;
-
+        case 4:
+            currentFragment = position;
+            fragment = new DonateFragment();
+            break;
+        case 5:
+            currentFragment = position;
+            fragment = new HomeFragment();
+            break;
 		default:
 			break;
 		}
@@ -332,16 +336,16 @@ public class MainActivity extends Activity {
                         updateExchangePrice(singleMarket.getString("m"), singleMarket.getDouble("l"));
                     }
 
-                    System.out.println("Cryptsy Price: " + exchangePrices.get("Cryptsy"));
-//                    System.out.println("CoinedUp Price: " + exchangePrices.get("CoinedUp"));
-                    System.out.println("Coins-E Price: " + exchangePrices.get("Coins-E"));
-                    System.out.println("Bter Price: " + exchangePrices.get("Bter"));
-                    System.out.println("Vircurex Price: " + exchangePrices.get("Vircurex"));
+//                    System.out.println("Cryptsy Price: " + exchangePrices.get("Cryptsy"));
+//                    System.out.println("Coins-E Price: " + exchangePrices.get("Coins-E"));
+//                    System.out.println("Bter Price: " + exchangePrices.get("Bter"));
+//                    System.out.println("Vircurex Price: " + exchangePrices.get("Vircurex"));
 
                 } catch (JSONException e) { e.printStackTrace(); }
 
             } else {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
+                Log.e("ServiceHandler", urlMarketPrices);
             }
 
             DecimalFormat menu = new DecimalFormat("#");
