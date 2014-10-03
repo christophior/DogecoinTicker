@@ -19,5 +19,7 @@
     <color name="positive_percent_change_text">#98b865</color>
     <color name="negative_percent_change_text">#CD6156</color>
     <color name="converter_label_color">#888</color>
+    <color name="doge_coin_yellow">#FFB604</color>
+    <color name="tifany_blue">#ff87d6ff</color>
 
 </resources>
