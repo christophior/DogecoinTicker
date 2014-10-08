@@ -57,7 +57,7 @@
         android:layout_marginBottom="20dp"
         android:layout_below="@+id/barcode_container"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="18dp"
         android:gravity="center_horizontal"
         android:background="@drawable/ic_launcher"
 
@@ -67,6 +67,7 @@
         android:layout_height="wrap_content"
         android:text="*Hold the coin to copy the address to your clip board and donate! Tips are greatly appreciated. Thanks :)"
         android:textStyle="italic"
+        android:textSize="11dp"
         android:textAllCaps="true"
         android:textColor="@color/list_background_pressed"
         android:gravity="center"
