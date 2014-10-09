@@ -39,6 +39,7 @@ import java.lang.String;
 import java.lang.System;
 import java.lang.Void;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -392,6 +393,9 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
 
         public double formatPricemBTC(Double price) {
             DecimalFormat df = new DecimalFormat("0.00000");
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+            symbols.setDecimalSeparator('.');
+            df.setDecimalFormatSymbols(symbols);
             double result = price * 1000;
             String formattedPrice = df.format(result);
             return Double.parseDouble(formattedPrice);

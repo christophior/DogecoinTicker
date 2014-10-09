@@ -7,8 +7,11 @@ import java.lang.String;
 import java.lang.System;
 import java.lang.Void;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -326,6 +329,7 @@ public class MainActivity extends Activity {
 
             // Making a request to url and getting response
             String jsonMarketPrice = sh.makeServiceCall(urlMarketPrices, ServiceHandler.GET);
+            System.out.println(jsonMarketPrice);
 
             if (jsonMarketPrice != null) {
                 try {
@@ -374,6 +378,9 @@ public class MainActivity extends Activity {
 
         public double formatPricemBTC(Double price){
             DecimalFormat df = new DecimalFormat("0.00000");
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+            symbols.setDecimalSeparator('.');
+            df.setDecimalFormatSymbols(symbols);
             double result = price * 1000;
             String formattedPrice = df.format(result);
             return Double.parseDouble(formattedPrice);
