@@ -263,10 +263,10 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
                                     sim = new SimpleDateFormat("kk:00");
                                     break;
                                 case 4: //3d
-                                    sim = new SimpleDateFormat("MM/dd kk:00");
+                                    sim = new SimpleDateFormat("MM/dd kk");
                                     break;
                                 case 5: //7d
-                                    sim = new SimpleDateFormat("MM/dd kk:00");
+                                    sim = new SimpleDateFormat("MM/dd kk");
                                     break;
                                 case 6: //14d
                                     sim = new SimpleDateFormat("MMM dd");

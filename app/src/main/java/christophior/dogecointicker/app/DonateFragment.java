@@ -73,17 +73,10 @@ public class DonateFragment extends Fragment {
         return rootView;
     }
 
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-
-
     }
-
 
     public void animate(View view) {
         Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
