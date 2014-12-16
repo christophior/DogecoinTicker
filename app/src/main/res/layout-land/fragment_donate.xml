@@ -3,18 +3,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/doge_coin_yellow"
-    android:layout_gravity="center"
+    android:layout_gravity="center_vertical"
     android:orientation="horizontal"
-    android:configChanges="keyboardHidden|orientation"
-    tools:context="christophior.dogecointicker.app"
-    >
+    tools:context="christophior.dogecointicker.app">
 
-    <View
-        android:id="@+id/about_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/barcode"
-        android:layout_centerInParent="true"
-        android:layout_margin="100dp">
-    </View>
+        <LinearLayout
+            android:id="@+id/about_container"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/barcode_container"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:orientation="vertical">
+                <View
+                    android:id="@+id/about_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/barcode"
+                    >
+                </View>
+            </LinearLayout>
+
+         </LinearLayout>
+
+
+        <Button
+            android:id="@+id/flip_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/dogecoin_button"
+            android:visibility="gone"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="*Hold the coin to copy the address to your clip board and donate! Tips are greatly appreciated. Thanks :)"
+            android:textStyle="italic"
+            android:textSize="11dp"
+            android:textAllCaps="true"
+            android:textColor="@color/list_background_pressed"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="18dp"
+            android:layout_marginRight="40dp"
+            android:id="@+id/textView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="27dp"
+            android:gravity="center"
+            android:text="Created by: \nChristophior \n&amp; \nZazador \n/r/dogecoin \nwww.dogecoin.com"
+            android:textStyle="bold"
+            android:lines="6"
+            android:textAllCaps="true"
+            android:textColor="@color/list_item_title"
+            android:id="@+id/textView"
+            android:layout_alignTop="@+id/about_container"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_alignEnd="@+id/textView2" />
 </RelativeLayout>
