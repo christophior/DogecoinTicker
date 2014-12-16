@@ -41,21 +41,7 @@
             android:visibility="gone"
             android:layout_alignBottom="@+id/textView"
             android:layout_centerHorizontal="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="*Hold the coin to copy the address to your clip board and donate! Tips are greatly appreciated. Thanks :)"
-            android:textStyle="italic"
-            android:textSize="11dp"
-            android:textAllCaps="true"
-            android:textColor="@color/list_background_pressed"
-            android:gravity="center"
-            android:layout_marginLeft="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="18dp"
-            android:layout_marginRight="40dp"
-            android:id="@+id/textView2" />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,6 +55,8 @@
             android:textColor="@color/list_item_title"
             android:id="@+id/textView"
             android:layout_alignTop="@+id/about_container"
-            android:layout_alignRight="@+id/textView2"
-            android:layout_alignEnd="@+id/textView2" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp" />
 </RelativeLayout>
