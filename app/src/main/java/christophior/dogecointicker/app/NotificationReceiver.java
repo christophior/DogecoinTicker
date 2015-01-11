@@ -25,6 +25,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     public static String UPDATE_NOTI = "christophior.dogecointicker.app.UPDATE_NOTI";
     public static HashMap<String, Double> exchangePrices = new HashMap<String, Double>();
     private static String urlMarketPrices = "http://doge.yottabyte.nu/json/markets.json";
+    private String currentCurrency = "mBTC";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -60,16 +61,16 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         if (prefs.getBoolean(("Cryptsy"), false))
             inboxStyle.addLine("1 Doge = " + exchangePrices.get("Cryptsy")
-                    + " mBTC @ Cryptsy");
+                    + " " + currentCurrency + " @ Cryptsy");
         if (prefs.getBoolean(("Coins-E"), false))
             inboxStyle.addLine("1 Doge = " + exchangePrices.get("Coins-E")
-                    + " mBTC @ Coins-E");
+                    + " " + currentCurrency + " @ Coins-E");
         if (prefs.getBoolean(("Bter"), false))
             inboxStyle.addLine("1 Doge = " + exchangePrices.get("Bter")
-                    + " mBTC @ Bter");
+                    + " " + currentCurrency + " @ Bter");
         if (prefs.getBoolean(("Vircurex"), false))
             inboxStyle.addLine("1 Doge = " + exchangePrices.get("Vircurex")
-                    + " mBTC @ Vircurex");
+                    + " " + currentCurrency + " @ Vircurex");
 
         // The stack builder object will contain an artificial back stack for the
         // started Activity.

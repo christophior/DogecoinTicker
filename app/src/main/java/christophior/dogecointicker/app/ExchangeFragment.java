@@ -67,6 +67,8 @@ public class ExchangeFragment extends Fragment implements OnClickListener {
     private String[] intervals = {"1h", "3h", "12h", "24h", "3d", "7d", "14d", "30d"};
     private String[] interval_labels = {"1 hour", "3 hours", "12 hours", "24 hours",
             "3 days", "7 days", "14 days", "30 days"};
+
+    // var for currency converter
     private double btcValueInUSD = 0;
     private double dogeCurrentValue = 0;
     public double btcConverterValue = 0, usdConverterValue = 0;
