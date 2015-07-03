@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 
     // Keep track of which fragment and time interval we're on
     static protected int currentFragment = 0;
-    static protected int currentInterval = 3;
+    static protected int currentInterval = 7;
     static protected double dogeConverterValue = 1000;
 
     AlertDialog levelDialog;
@@ -306,8 +306,6 @@ public class MainActivity extends Activity {
         }
 
         private void updateExchangePrice(String exchange, double price){
-
-            int coefficient = 1000;
 
             if (exchange.equals("cryptsy")){
                 exchangePrices.put("Cryptsy", formatPricemBTC(price));

@@ -1,7 +1,7 @@
 package christophior.dogecointicker.app;
 
 /**
- * Created by ChrisV on 4/29/14.
+ * Created by Christophior on 4/29/14.
  */
 import android.app.Fragment;
 import android.os.Bundle;
